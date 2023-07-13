@@ -1,4 +1,4 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+This is a webb app that allows phone repairers to register their services with thier location so that people who need thier services can search for repairers within thier location.
 
 ## Getting Started
 

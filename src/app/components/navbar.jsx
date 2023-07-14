@@ -1,6 +1,8 @@
 "use client";
 import Link from "next/link";
 import { useState } from "react";
+// import { MenuIcon } from "react-heroicons-v2";
+import { MenuIcon, XIcon } from "@heroicons/react/outline";
 
 const Navbar = () => {
 	const [open, setOpen] = useState(true);
@@ -15,10 +17,6 @@ const Navbar = () => {
 								!open ? setOpen(!open) : open;
 							}}
 						>
-							{/* <div> */}
-							{/* logo */}
-							{/* <img src="/5.jpg" alt="flyASAP logo" className="align-top w-16" />
-					</div> */}
 							<div>
 								<span className="text-green-900 font-bold">remote</span>
 								<span className="text-blue-900 font-bold">MobileFix</span>
@@ -28,9 +26,11 @@ const Navbar = () => {
 							className="md:hidden cursor-pointer"
 							onClick={() => setOpen(!open)}
 						>
-							<ion-icon name={open ? "menu" : "close"} size="large">
-								v
-							</ion-icon>
+							{open ? (
+								<MenuIcon className="h-6 w-6" />
+							) : (
+								<XIcon className="h-6 w-6" />
+							)}
 						</div>
 					</div>
 					<div

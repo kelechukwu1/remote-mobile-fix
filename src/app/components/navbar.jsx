@@ -1,8 +1,7 @@
 "use client";
 import Link from "next/link";
 import { useState } from "react";
-// import { MenuIcon } from "react-heroicons-v2";
-import { MenuIcon, XIcon } from "@heroicons/react/outline";
+// import { MenuIcon, XIcon } from "@heroicons/react/outline";
 
 const Navbar = () => {
 	const [open, setOpen] = useState(true);
@@ -10,37 +9,69 @@ const Navbar = () => {
 		<>
 			<header>
 				<div className="md:flex md:px-10 md:pr-10 justify-between items-center shadow">
-					<div className="flex justify-between md:items-center p-4 ">
-						<Link
-							href="/"
-							onClick={() => {
-								!open ? setOpen(!open) : open;
-							}}
-						>
-							<div>
-								<span className="text-green-900 font-bold">remote</span>
-								<span className="text-blue-900 font-bold">MobileFix</span>
-							</div>
-						</Link>
+					<div className="flex justify-between items-center p-4 ">
+						<div>
+							<Link
+								href="/"
+								onClick={() => {
+									!open ? setOpen(!open) : open;
+								}}
+							>
+								<div>
+									<span className="text-green-900 font-bold">remote</span>
+									<span className="text-blue-900 font-bold">MobileFix</span>
+								</div>
+							</Link>
+						</div>
 						<div
 							className="md:hidden cursor-pointer"
 							onClick={() => setOpen(!open)}
 						>
 							{open ? (
-								<MenuIcon className="h-6 w-6" />
+								<svg
+									xmlns="http://www.w3.org/2000/svg"
+									fill="none"
+									viewBox="0 0 24 24"
+									strokeWidth="1.5"
+									stroke="currentColor"
+									className="w-6 h-6"
+									onClick={() => setOpen(!open)}
+								>
+									<path
+										strokeLinecap="round"
+										strokeLinejoin="round"
+										d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5"
+									/>
+								</svg>
 							) : (
-								<XIcon className="h-6 w-6" />
+								// <MenuIcon className="h-6 w-6" />
+								<svg
+									xmlns="http://www.w3.org/2000/svg"
+									fill="none"
+									viewBox="0 0 24 24"
+									strokeWidth="1.5"
+									stroke="currentColor"
+									className="w-6 h-6"
+									onClick={() => setOpen(!open)}
+								>
+									<path
+										strokeLinecap="round"
+										strokeLinejoin="round"
+										d="M6 18L18 6M6 6l12 12"
+									/>
+								</svg>
+								// <XIcon className="h-6 w-6" />
 							)}
 						</div>
 					</div>
 					<div
-						className={`md:flex md:items-center md:justify-between pb-12 md:pb-0 bg-white md:z-auto left-0 w-full md:w-auto md:pl-0 pl-9 transition-all duration-500 ease-in ${
+						className={`md:flex md:items-center md:justify-between pb-12 md:pb-0  md:z-auto left-0 w-full md:w-auto md:pl-0 pl-9 transition-all duration-500 ease-in ${
 							open ? "hidden" : "top-[-490px] md:opacity-100 opacity-100"
 						}`}
 					>
 						<div
 							onClick={() => {
-								!open ? setOpen(!open) : open;
+								setOpen(false);
 							}}
 							className="md:flex "
 						>
@@ -48,14 +79,14 @@ const Navbar = () => {
 								<Link href="/">Home</Link>
 							</div>
 							<div className="md:px-4 my-5 md:my-0">
-								<Link href="/contact">Contact</Link>
+								<Link href="/register">Register</Link>
+							</div>
+							<div className="md:px-4 my-5 md:my-0">
+								<Link href="/login">Login</Link>
 							</div>
 							<div className="md:px-4 my-5 md:my-0">
 								<Link href="/about">About</Link>
 							</div>
-							{/* <Link className="p-4" href="/about/5">
-					AboutID
-				</Link> */}
 						</div>
 					</div>
 				</div>
@@ -65,3 +96,10 @@ const Navbar = () => {
 };
 
 export default Navbar;
+// import { ReactComponent as CloseOutline } from "../../../public/assets/close-outline.svg";
+// import { ReactComponent as MenuOutline } from "../../../public/assets/menu-outline.svg";
+/*  <Link className="p-4" href="/about/5">
+      AboutID
+    </Link> */
+// <ion-icon name="menu"></ion-icon>
+// <ion-icon name="close"></ion-icon>

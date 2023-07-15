@@ -17,7 +17,7 @@ const register = () => {
 						/>
 					</div>
 				</div>
-				<div className="mx-10">
+				{/* <div className="mx-10">
 					<div>
 						<label>What is your business type?</label>
 					</div>
@@ -27,7 +27,7 @@ const register = () => {
 							<option>Private Person</option>
 						</select>
 					</div>
-				</div>
+				</div> */}
 				<div className="mx-10">
 					<div>
 						<label>Where's your business located?</label>
@@ -48,7 +48,7 @@ const register = () => {
 							className="p-2 w-full rounded-sm my-2"
 						/>
 					</div>
-					<div className="w-full">
+					{/* <div className="w-full">
 						<label
 							htmlFor="flight-type"
 							className=" mb-2 text-white md:text-2xl"
@@ -59,17 +59,14 @@ const register = () => {
 							<option>Imo state</option>
 							<option>Imo state</option>
 						</select>
-					</div>
+					</div> */}
 				</div>
-        <Link href={'/'}
-          className="mx-10 my-5 mb-10">
-					<div className="bg-blue-600 w-full p-2 rounded-sm">
-						Continue
-					</div>
+				<Link href={"/"} className="mx-10 my-5 mb-10">
+					<div className="bg-blue-600 w-full p-2 rounded-sm">Continue</div>
 				</Link>
 			</form>
 
-			<hr className="m-4" />  
+			<hr className="m-4" />
 		</div>
 	);
 };

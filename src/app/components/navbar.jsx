@@ -17,8 +17,8 @@ const Navbar = () => {
 								}}
 							>
 								<div>
-									<span className="text-green-600 font-bold">remote</span>
-									<span className="text-blue-400 font-bold">MobileFix</span>
+									<span className="text-green-800 font-bold">remote</span>
+									<span className="text-blue-800 font-bold">MobileFix</span>
 								</div>
 							</Link>
 						</div>

@@ -3,7 +3,7 @@ import React from "react";
 
 const SideBarNav = () => {
 	return (
-		<div className="bg-slate-800 h-full md:w-[10rem] lg:w-[20rem]">
+		<div className="bg-slate-900 h-full md:w-[10rem] lg:w-[20rem]">
 			<div className="p-4 ">
 				<div className="md:px-4 my-10 md:my-0 flex items-center">
 					<div className="px-2">

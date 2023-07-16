@@ -1,7 +1,10 @@
+"use client";
 import Link from "next/link";
 import Navbar from "./components/navbar";
+import DashboardNav from "./components/dashboardNav";
 import "./globals.css";
 import { Inter } from "next/font/google";
+import { usePathname } from "next/navigation";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata = {
@@ -10,15 +13,14 @@ export const metadata = {
 };
 
 export default function RootLayout({ children }) {
+	const pathname = usePathname();
 	return (
 		<html lang="en">
 			<body className={inter.className}>
-				<Navbar />
+				{pathname === "/dashboard" ? <DashboardNav /> : <Navbar />}
 				{children}
-				<footer>
-					<div className="text-center mt-5">
-						Copyright &copy;Kelechukwu 2023
-					</div>
+				<footer className="my-10 items-center justify-center">
+					<div className="text-center">Copyright &copy;Kelechukwu 2023</div>
 					<div className="text-center text-green-500">
 						<Link href="/about">About this project</Link>
 					</div>

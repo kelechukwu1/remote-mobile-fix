@@ -2,7 +2,7 @@
 import Link from "next/link";
 import { useState } from "react";
 
-const Navbar = () => {
+const DashboardNav = () => {
 	const [open, setOpen] = useState(false);
 	return (
 		<>
@@ -25,6 +25,7 @@ const Navbar = () => {
 						<div
 							className="md:hidden cursor-pointer"
 							onClick={() => {
+								console.log("clicked");
 								setOpen(!open);
 							}}
 						>
@@ -76,13 +77,10 @@ const Navbar = () => {
 								<Link href="/">Home</Link>
 							</div>
 							<div className="md:px-4 my-5 md:my-0">
-								<Link href="/register">Register</Link>
+								<Link href="/register">Jobs</Link>
 							</div>
 							<div className="md:px-4 my-5 md:my-0">
-								<Link href="/login">Login</Link>
-							</div>
-							<div className="md:px-4 my-5 md:my-0">
-								<Link href="/about">About</Link>
+								<Link href="/login">Logout</Link>
 							</div>
 						</div>
 					</div>
@@ -92,15 +90,4 @@ const Navbar = () => {
 	);
 };
 
-export default Navbar;
-// import { MenuIcon, XIcon } from "@heroicons/react/outline";
-// <XIcon className="h-6 w-6" />
-// <MenuIcon className="h-6 w-6" />
-
-// import { ReactComponent as CloseOutline } from "../../../public/assets/close-outline.svg";
-// import { ReactComponent as MenuOutline } from "../../../public/assets/menu-outline.svg";
-/*  <Link className="p-4" href="/about/5">
-      AboutID
-    </Link> */
-// <ion-icon name="menu"></ion-icon>
-// <ion-icon name="close"></ion-icon>
+export default DashboardNav;

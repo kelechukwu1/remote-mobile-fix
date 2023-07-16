@@ -1,12 +1,12 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-.showcase{
+/* .showcase{
   @apply font-semibold h-96 w-full bg-no-repeat bg-center text-white relative flex flex-col justify-center items-center text-center after:content-[''] after:absolute after:top-0 after:left-0 after:w-full after:h-full after:bg-black after:bg-opacity-70
 }
 .showcase *{
   @apply z-20
-}
+} */
 
 :root {
   --foreground-rgb: 0, 0, 0;

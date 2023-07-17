@@ -3,126 +3,141 @@ import React from "react";
 
 const SideBarNav = () => {
 	return (
-		<div className="bg-slate-900 h-full md:w-[10rem] lg:w-[20rem]">
-			<div className="p-4 ">
-				<div className="md:px-4 my-10 md:my-0 flex items-center">
-					<div className="px-2">
-						<svg
-							xmlns="http://www.w3.org/2000/svg"
-							fill="none"
-							viewBox="0 0 24 24"
-							strokeWidth="1.5"
-							stroke="currentColor"
-							className="w-6 h-6"
-						>
-							<path
-								strokeLinecap="round"
-								strokeLinejoin="round"
-								d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5"
-							/>
-						</svg>
-					</div>
-					<Link href="/">Home</Link>
-				</div>
-				<div className="md:px-4 my-10 md:my-0 flex">
-					<div className="px-2">
-						<svg
-							xmlns="http://www.w3.org/2000/svg"
-							fill="none"
-							viewBox="0 0 24 24"
-							strokeWidth="1.5"
-							stroke="currentColor"
-							className="w-6 h-6"
-						>
-							<path
-								strokeLinecap="round"
-								strokeLinejoin="round"
-								d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5"
-							/>
-						</svg>
-					</div>
-					<Link href="/register">Jobs</Link>
-				</div>
-				<div className="md:px-4 my-10 md:my-0 flex">
-					<div className="px-2">
-						<svg
-							xmlns="http://www.w3.org/2000/svg"
-							fill="none"
-							viewBox="0 0 24 24"
-							strokeWidth="1.5"
-							stroke="currentColor"
-							className="w-6 h-6"
-						>
-							<path
-								strokeLinecap="round"
-								strokeLinejoin="round"
-								d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5"
-							/>
-						</svg>
-					</div>
-					<Link href="/login">Logout</Link>
+		<section>
+			<div className="bg-slate-900 h-screen  pt-8 px-4 pb-4 justify-between flex-col  w-80">
+				<div className=" text-white md:w-32 h-[40rem]">
+					<Link href="/jobs">
+						<div className="hover:bg-blue-900 w-full p-2 rounded md:px-4 flex transition-all duration-300">
+							<div className="px-2">
+								<svg
+									xmlns="http://www.w3.org/2000/svg"
+									fill="none"
+									viewBox="0 0 24 24"
+									strokeWidth="1.5"
+									stroke="currentColor"
+									className="w-6 h-6"
+								>
+									<path
+										strokeLinecap="round"
+										strokeLinejoin="round"
+										d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5"
+									/>
+								</svg>
+							</div>
+							<div className="hidden md:block">Jobs</div>
+						</div>
+					</Link>
+					<Link href="/account">
+						<div className="hover:bg-blue-900 w-full p-2 rounded md:px-4 flex transition-all duration-300">
+							<div className="px-2">
+								<svg
+									xmlns="http://www.w3.org/2000/svg"
+									fill="none"
+									viewBox="0 0 24 24"
+									strokeWidth="1.5"
+									stroke="currentColor"
+									className="w-6 h-6"
+								>
+									<path
+										strokeLinecap="round"
+										strokeLinejoin="round"
+										d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5"
+									/>
+								</svg>
+							</div>
+							<div className="hidden md:block">Account</div>
+						</div>
+					</Link>
+					<Link href={"logout"}>
+						<div className="hover:bg-blue-900 w-full p-2 rounded md:px-4 flex transition-all duration-300">
+							<div className="px-2">
+								<svg
+									xmlns="http://www.w3.org/2000/svg"
+									fill="none"
+									viewBox="0 0 24 24"
+									strokeWidth="1.5"
+									stroke="currentColor"
+									className="w-6 h-6"
+								>
+									<path
+										strokeLinecap="round"
+										strokeLinejoin="round"
+										d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5"
+									/>
+								</svg>
+							</div>
+							<div className="hidden md:block">Logout</div>
+						</div>
+					</Link>
+
+					<Link href={"/"}>
+						<div className="hover:bg-blue-900 w-full p-2 rounded md:px-4 flex transition-all duration-300">
+							<div className="px-2">
+								<svg
+									xmlns="http://www.w3.org/2000/svg"
+									fill="none"
+									viewBox="0 0 24 24"
+									strokeWidth="1.5"
+									stroke="currentColor"
+									className="w-6 h-6"
+								>
+									<path
+										strokeLinecap="round"
+										strokeLinejoin="round"
+										d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5"
+									/>
+								</svg>
+							</div>
+							<div className="hidden md:block">Logout</div>
+						</div>
+					</Link>
+					<Link href={"/"}>
+						<div className="hover:bg-blue-900 w-full p-2 rounded md:px-4 flex transition-all duration-300">
+							<div className="px-2">
+								<svg
+									xmlns="http://www.w3.org/2000/svg"
+									fill="none"
+									viewBox="0 0 24 24"
+									strokeWidth="1.5"
+									stroke="currentColor"
+									className="w-6 h-6"
+								>
+									<path
+										strokeLinecap="round"
+										strokeLinejoin="round"
+										d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5"
+									/>
+								</svg>
+							</div>
+							<div className="hidden md:block">Logout</div>
+						</div>
+					</Link>
+					<Link href={"/"}>
+						<div className="hover:bg-blue-900 w-full p-2 rounded md:px-4 flex transition-all duration-300">
+							<div className="px-2">
+								<svg
+									xmlns="http://www.w3.org/2000/svg"
+									fill="none"
+									viewBox="0 0 24 24"
+									strokeWidth="1.5"
+									stroke="currentColor"
+									className="w-6 h-6"
+								>
+									<path
+										strokeLinecap="round"
+										strokeLinejoin="round"
+										d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5"
+									/>
+								</svg>
+							</div>
+							<div className="hidden md:block">Logout</div>
+						</div>
+					</Link>
 				</div>
 
-				<div className="md:px-4 my-10 md:my-0 flex">
-					<div className="px-2">
-						<svg
-							xmlns="http://www.w3.org/2000/svg"
-							fill="none"
-							viewBox="0 0 24 24"
-							strokeWidth="1.5"
-							stroke="currentColor"
-							className="w-6 h-6"
-						>
-							<path
-								strokeLinecap="round"
-								strokeLinejoin="round"
-								d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5"
-							/>
-						</svg>
-					</div>
-					<Link href="/login">Logout</Link>
-				</div>
-				<div className="md:px-4 my-10 md:my-0 flex">
-					<div className="px-2">
-						<svg
-							xmlns="http://www.w3.org/2000/svg"
-							fill="none"
-							viewBox="0 0 24 24"
-							strokeWidth="1.5"
-							stroke="currentColor"
-							className="w-6 h-6"
-						>
-							<path
-								strokeLinecap="round"
-								strokeLinejoin="round"
-								d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5"
-							/>
-						</svg>
-					</div>
-					<Link href="/login">Logout</Link>
-				</div>
-				<div className="md:px-4 my-10 md:my-0 flex">
-					<div className="px-2">
-						<svg
-							xmlns="http://www.w3.org/2000/svg"
-							fill="none"
-							viewBox="0 0 24 24"
-							strokeWidth="1.5"
-							stroke="currentColor"
-							className="w-6 h-6"
-						>
-							<path
-								strokeLinecap="round"
-								strokeLinejoin="round"
-								d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5"
-							/>
-						</svg>
-					</div>
-					<Link href="/login">Logout</Link>
-				</div>
+				<hr />
 			</div>
-			<hr />
-		</div>
+		</section>
 	);
 };
 

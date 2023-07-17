@@ -1,10 +1,7 @@
 import Layout from "../components/Layout";
 
 const page = () => {
-	return (
-		<Layout>
-			<div>this is ur dashboard</div>
-		</Layout>
-	);
+	return <Layout>your accounts</Layout>;
 };
+
 export default page;

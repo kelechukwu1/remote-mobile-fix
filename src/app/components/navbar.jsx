@@ -1,8 +1,8 @@
 "use client";
 import Link from "next/link";
 import { useState } from "react";
-import { IoMenuOutline } from "react-icons/bi";
-import { IoCloseOutline } from "react-icons/bi";
+import { IoMenuOutline } from "react-icons/io5";
+import { IoCloseOutline } from "react-icons/io5";
 
 const Navbar = () => {
 	const [open, setOpen] = useState(false);
@@ -30,7 +30,11 @@ const Navbar = () => {
 								setOpen(!open);
 							}}
 						>
-							{!open ? <IoMenuOutline /> : <IoCloseOutline />}
+							{!open ? (
+								<IoMenuOutline className="w-6 h-6" />
+							) : (
+								<IoCloseOutline className="w-6 h-6" />
+							)}
 						</div>
 					</div>
 					<div
@@ -42,7 +46,7 @@ const Navbar = () => {
 							onClick={() => {
 								setOpen(!open);
 							}}
-							className="md:flex "
+							className="md:flex"
 						>
 							<div className="md:px-4 my-5 md:my-0">
 								<Link href="/">Home</Link>

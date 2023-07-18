@@ -17,7 +17,14 @@ export default function RootLayout({ children }) {
 	return (
 		<html lang="en">
 			<body className={inter.className}>
-				{pathname === "/dashboard" ? <DashboardNav /> : <Navbar />}
+				{pathname === "/dashboard" ||
+				pathname === "/requests" ||
+				pathname === "/account" ||
+				pathname === "/settings" ? (
+					<DashboardNav />
+				) : (
+					<Navbar />
+				)}
 				{children}
 				<footer className="my-10 items-center justify-center">
 					<div className="text-center">Copyright &copy;Kelechukwu 2023</div>

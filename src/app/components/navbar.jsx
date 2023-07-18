@@ -37,8 +37,9 @@ const Navbar = () => {
 							)}
 						</div>
 					</div>
+
 					<div
-						className={`md:flex md:items-center md:justify-between pb-12 md:pb-0  md:z-auto left-0 w-full md:w-auto md:pl-0 pl-9 transition-all duration-500 ease-in ${
+						className={`hidden md:flex md:items-center md:justify-between pb-5 md:pb-0  md:z-auto left-0 w-full md:w-auto md:pl-0 pl-9 transition-all duration-500 ease-in ${
 							!open ? "hidden" : "top-[-490px] md:opacity-100 opacity-100"
 						}`}
 					>
@@ -62,6 +63,35 @@ const Navbar = () => {
 							</div>
 						</div>
 					</div>
+					<div className={` ${!open ? "hidden" : "mobileNav"}`}>
+						<div
+							onClick={() => {
+								setOpen(!open);
+							}}
+							className="w-full my-5 transition-all duration-500"
+						>
+							<Link href="/">
+								<div className="hover:bg-gray-50 px-6 py-2 rounded-sm">
+									Home
+								</div>
+							</Link>
+							<Link href="/register">
+								<div className="md:px-4 md:my-0 hover:bg-gray-50 px-6 py-2 rounded-sm">
+									Register
+								</div>
+							</Link>
+							<Link href="/login">
+								<div className="md:px-4 md:my-0 hover:bg-gray-50 px-6 py-2 rounded-sm">
+									Login
+								</div>
+							</Link>
+							<Link href="/about">
+								<div className="md:px-4 md:my-0 hover:bg-gray-50 px-6 py-2 rounded-sm">
+									About
+								</div>
+							</Link>
+						</div>
+					</div>
 				</div>
 			</header>
 		</>
@@ -69,14 +99,3 @@ const Navbar = () => {
 };
 
 export default Navbar;
-// import { MenuIcon, XIcon } from "@heroicons/react/outline";
-// <XIcon className="h-6 w-6" />
-// <MenuIcon className="h-6 w-6" />
-
-// import { ReactComponent as CloseOutline } from "../../../public/assets/close-outline.svg";
-// import { ReactComponent as MenuOutline } from "../../../public/assets/menu-outline.svg";
-/*  <Link className="p-4" href="/about/5">
-      AboutID
-    </Link> */
-// <ion-icon name="menu"></ion-icon>
-// <ion-icon name="close"></ion-icon>

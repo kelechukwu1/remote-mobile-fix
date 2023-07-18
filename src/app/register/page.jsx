@@ -1,15 +1,18 @@
 import Link from "next/link";
+import { BsArrowLeft } from "react-icons/bs";
 
 const page = () => {
+	// const navigate =
+	// const goBack = () => {
+
+	// }
 	return (
 		<div className="bg-gray-100 py-5 ">
-			<div className="px-10 pb-5">
-				<Link
-					href={"/"}
-					className="bg-blue-600 p-2 rounded hover:bg-blue-700 transition duration-300 text-white"
-				>
-					Go Back
-				</Link>
+			<div
+				className="mx-10 mb-5 w-14 py-2 rounded-md bg-blue-800 hover:bg-blue-900 transition duration-500 text-white"
+				// onClick={goBack}
+			>
+				<BsArrowLeft className="w-6 h-6 ml-4" />
 			</div>
 			<div className="card bg-white mx-10 rounded-lg p-5">
 				<div className=" justify-center items-center mx-5 md:mx-20 lg:mx-36 ">

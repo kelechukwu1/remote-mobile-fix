@@ -1,10 +1,8 @@
+import React from "react";
 import Layout from "../components/Layout";
 
 const page = () => {
-	return (
-		<Layout>
-			<div>this is ur dashboard home</div>
-		</Layout>
-	);
+	return <Layout>your account settings</Layout>;
 };
+
 export default page;

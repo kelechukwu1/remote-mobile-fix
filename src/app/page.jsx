@@ -11,7 +11,7 @@ export default function Home() {
 						}}
 						className="bg-cover bg-no-repeat text-center items-center w-full"
 					>
-						<div className="bg-black bg-opacity-50 py-20 px-5 md:px-[10rem] lg:px-[15rem]">
+						<div className="bg-black bg-opacity-70 py-20 px-5 md:px-[10rem] lg:px-[15rem]">
 							<h1 className="text-4xl mb-5 text-blue-50">
 								Find Phone Repairers Around Your Location
 							</h1>

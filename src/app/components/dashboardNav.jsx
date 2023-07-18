@@ -1,9 +1,23 @@
 "use client";
 import Link from "next/link";
 import { useState } from "react";
+import { IoMenuOutline, IoCloseOutline } from "react-icons/io5";
+import { useRouter } from "next/navigation";
 
 const DashboardNav = () => {
 	const [open, setOpen] = useState(false);
+	const router = useRouter();
+
+	const navLinks = [
+		{
+			name: "Home",
+			link: "/",
+		},
+		{
+			name: "Logout",
+			link: "login",
+		},
+	];
 	return (
 		<>
 			<header>
@@ -46,15 +60,17 @@ const DashboardNav = () => {
 							}}
 							className="md:flex mx-2"
 						>
-							<Link href="/" className="mx-5">
-								<div className="md:px-5 md:py-2 my-5 md:my-0 bg-blue-800 hover:bg-blue-900 text-white rounded-sm transition duration-500">
-									Home
-								</div>
-							</Link>
-
-							<div className="md:px-5 md:py-2 my-5 md:my-0 bg-blue-800 hover:bg-blue-900 text-white rounded-sm transition duration-500">
-								<Link href="/login">Logout</Link>
-							</div>
+							{navLinks.map(({ link, name }) => (
+								<Link href={link} key={name} className="mx-5">
+									<div
+										className={`md:px-5 md:py-2 my-5 md:my-0 bg-blue-800 hover:bg-blue-900 text-white rounded-sm transition duration-500 ${
+											router.pathname === link ? "text-red-500" : ""
+										}`}
+									>
+										{name}
+									</div>
+								</Link>
+							))}
 						</div>
 					</div>
 					<div className={`${!open ? "hidden" : "mobileNav"}`}>
@@ -64,17 +80,17 @@ const DashboardNav = () => {
 							}}
 							className="w-full my-5 transition-all duration-500"
 						>
-							<Link href="/">
-								<div className="md:px-4 md:my-0 hover:bg-gray-50 px-6 py-2 rounded-sm">
-									Home
-								</div>
-							</Link>
-
-							<Link href="/login">
-								<div className="md:px-4 md:my-0 hover:bg-gray-50 px-6 py-2 rounded-sm">
-									Logout
-								</div>
-							</Link>
+							{navLinks.map(({ link, name }) => (
+								<Link href={link} key={name}>
+									<div
+										className={`md:px-4 md:my-0 hover:bg-gray-50 px-6 py-2 rounded-sm ${
+											router.pathname === link ? "text-red-500" : ""
+										}`}
+									>
+										{name}
+									</div>
+								</Link>
+							))}
 						</div>
 					</div>
 				</div>

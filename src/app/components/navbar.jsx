@@ -1,13 +1,29 @@
 "use client";
 
 import Link from "next/link";
-import { useState } from "react";
+import { useState, useEffect, useRef } from "react";
 import { IoMenuOutline, IoCloseOutline } from "react-icons/io5";
 import { usePathname } from "next/navigation";
 
 const Navbar = () => {
 	const pathname = usePathname();
 	const [open, setOpen] = useState(false);
+	const navbarRef = useRef(null);
+	useEffect(() => {
+		const handleOutsideClick = (event) => {
+			if (navbarRef.current && !navbarRef.current.contains(event.target)) {
+				setOpen(false);
+			}
+		};
+
+		if (open) {
+			document.addEventListener("click", handleOutsideClick);
+		}
+
+		return () => {
+			document.removeEventListener("click", handleOutsideClick);
+		};
+	}, [open]);
 
 	const navLinks = [
 		{
@@ -60,6 +76,7 @@ const Navbar = () => {
 					</div>
 
 					<div
+						ref={navbarRef}
 						className="hidden md:flex md:items-center md:justify-between pb-5 md:pb-0  md:z-auto left-0 w-full md:w-auto md:pl-0 pl-9 transition-all duration-500 ease-in ${
 							top-[-490px] md:opacity-100 opacity-100"
 					>

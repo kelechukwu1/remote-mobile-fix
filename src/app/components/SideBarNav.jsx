@@ -17,7 +17,7 @@ const SideBarNav = () => {
 							<div className="hidden md:block">Home</div>
 						</div>
 					</Link>
-					<Link href="/requests">
+					<Link href="/dashboard/requests">
 						<div className="hover:bg-blue-900 w-full p-2 rounded items-center md:px-4 flex transition-all duration-300">
 							<div className="px-2">
 								<TbMessage2Pin />
@@ -26,7 +26,7 @@ const SideBarNav = () => {
 						</div>
 					</Link>
 
-					<Link href="/settings">
+					<Link href="/dashboard/settings">
 						<div className="hover:bg-blue-900 w-full p-2 rounded items-center md:px-4 flex transition-all duration-300">
 							<div className="px-2">
 								<BsTools />
@@ -34,7 +34,7 @@ const SideBarNav = () => {
 							<div className="hidden md:block">Settings</div>
 						</div>
 					</Link>
-					<Link href={"/account"}>
+					<Link href={"/dashboard/account"}>
 						<div className="hover:bg-blue-900 w-full p-2 rounded items-center md:px-4 flex transition-all duration-300">
 							<div className="px-2">
 								<IoQrCodeOutline />

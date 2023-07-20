@@ -3,10 +3,10 @@
 import Link from "next/link";
 import { useState } from "react";
 import { IoMenuOutline, IoCloseOutline } from "react-icons/io5";
-import { useRouter } from "next/navigation";
+import { usePathname } from "next/navigation";
 
 const Navbar = () => {
-	const router = useRouter();
+	const pathname = usePathname();
 	const [open, setOpen] = useState(false);
 
 	const navLinks = [
@@ -73,7 +73,7 @@ const Navbar = () => {
 								<Link href={link} key={name} className="mx-2">
 									<div
 										className={`md:px-4 my-5 md:my-0 ${
-											router.pathname === link ? "text-red-500" : ""
+											pathname.startsWith(link) ? "" : ""
 										}`}
 									>
 										{name}
@@ -94,7 +94,7 @@ const Navbar = () => {
 								<Link href={link} key={name}>
 									<div
 										className={`hover:bg-gray-50 px-6 py-2 rounded-sm ${
-											router.pathname === link ? "text-red-500" : ""
+											pathname.startsWith(link) ? "" : ""
 										}`}
 									>
 										{name}

@@ -2,11 +2,11 @@
 import Link from "next/link";
 import { useState } from "react";
 import { IoMenuOutline, IoCloseOutline } from "react-icons/io5";
-import { useRouter } from "next/navigation";
+import { usePathname } from "next/navigation";
 
 const DashboardNav = () => {
 	const [open, setOpen] = useState(false);
-	const router = useRouter();
+	const pathname = usePathname();
 
 	const navLinks = [
 		{
@@ -64,7 +64,7 @@ const DashboardNav = () => {
 								<Link href={link} key={name} className="mx-5">
 									<div
 										className={`md:px-5 md:py-2 my-5 md:my-0 bg-blue-800 hover:bg-blue-900 text-white rounded-sm transition duration-500 ${
-											router.pathname === link ? "text-red-500" : ""
+											pathname.startsWith(link) ? "" : ""
 										}`}
 									>
 										{name}
@@ -84,7 +84,7 @@ const DashboardNav = () => {
 								<Link href={link} key={name}>
 									<div
 										className={`md:px-4 md:my-0 hover:bg-gray-50 px-6 py-2 rounded-sm ${
-											router.pathname === link ? "text-red-500" : ""
+											pathname.startsWith(link) ? "" : ""
 										}`}
 									>
 										{name}

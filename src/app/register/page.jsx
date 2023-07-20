@@ -3,88 +3,112 @@
 import Link from "next/link";
 import { BsArrowLeft } from "react-icons/bs";
 import { useRouter } from "next/navigation";
+import { useState } from "react";
 
 const page = () => {
 	const router = useRouter();
+	const [businessName, setBusinessName] = useState("");
+	const [businessAddress, setBusinessAddress] = useState("");
+	const [city, setCity] = useState("");
+	const [service, setService] = useState("");
+
+	const handleSubmit = () => {
+		if (
+			businessName === "" ||
+			businessAddress === "" ||
+			city === "" ||
+			service === ""
+		) {
+			//validate the input fields
+		}
+	};
 
 	return (
 		<div className="bg-gray-100 py-5 ">
 			<div
-				className="mx-10 mb-5 w-14 py-2 rounded-md bg-blue-800 hover:bg-blue-900 transition duration-500 text-white"
+				className="mx-10 mb-5 w-14 py-2 rounded-md bg-slate-900 hover:bg-slate-950 transition duration-500 text-white"
 				onClick={() => router.push("/")}
 			>
 				<BsArrowLeft className="w-6 h-6 ml-4" />
 			</div>
-			<div className="card bg-white mx-10 rounded-lg p-5">
-				<div className=" justify-center items-center mx-5 md:mx-20 lg:mx-36 ">
-					<form>
-						<div>
-							<label>Enter your busines name</label>
-						</div>
-						<div className="">
-							<input
-								type="text"
-								placeholder="Kelvin's AutoFix"
-								className="p-2 w-full bg-gray-50 focus:outline-none rounded-sm my-2 text-black border border-gray-700"
-							/>
-						</div>
-						<div>
-							<label>Where's your business?</label>
-						</div>
-						<div className="w-full">
-							<input
-								type="text"
-								placeholder="Address"
-								className="p-2 w-full bg-gray-50 focus:outline-none rounded-sm my-2 text-black border border-gray-700"
-							/>
-						</div>
-						<div>
-							<label>City/Area</label>
-						</div>
-						<div className="w-full">
-							<input
-								type="text"
-								placeholder="City/Area"
-								className="p-2 w-full bg-gray-50 focus:outline-none rounded-sm my-2 text-black border border-gray-700"
-							/>
-						</div>
-						<div>
-							<label>Describe your service</label>
-						</div>
-						<div className="w-full">
-							<textarea
-								placeholder="Enter your text..."
-								className="p-2 h-28 w-full bg-gray-50 focus:outline-none rounded-sm my-2 text-black border border-gray-700"
-							></textarea>
-						</div>
-						<div>
-							<label>Your qualification(s)</label>
-						</div>
-						<div className="w-full">
-							<textarea
-								placeholder="e.g. Member of Phone repairers association"
-								className="p-2 h-28 w-full bg-gray-50 focus:outline-none rounded-sm my-2 text-black border border-gray-700"
-							></textarea>
-						</div>
-						<div>
-							<label>How many kilometers can you travel for work?</label>
-						</div>
-						<div className="w-full">
-							<input
-								type="text"
-								placeholder="60"
-								className="p-2 w-full bg-gray-50 focus:outline-none rounded-sm my-2 text-black border border-gray-700"
-							/>
-							<h1>I can travel within 60 kilometers of my business</h1>
-						</div>
-						<div className="mt-10 text-center">
-							<label>Upload a profile picture here</label>
-						</div>
-						<Link href="/dashboard">
-							<div className="text-white bg-blue-800 p-2 my-2 rounded-sm text-center hover:bg-blue-900 transition duration-500 cursor-pointer">
-								Proceed
+			<div className="bg-white rounded-2xl shadow-lg mx-5 px-5 items-center py-10">
+				<div>
+					<form onSubmit={handleSubmit} className="flex flex-col gap-4">
+						<div className="text-xl">
+							<div>
+								<label>Business name</label>
+								<span className="text-red-500">*</span>
 							</div>
-						</Link>
+							<div>
+								<input
+									onChange={(e) => setBusinessName(e.target.value)}
+									type="text"
+									placeholder="Kelvin's AutoFix"
+									className="p-2 w-full md:text-2xl rounded-lg border border-gray-500 text-xl"
+								/>
+							</div>
+						</div>
+						<div className="text-xl">
+							<div>
+								<label>Where's your business?</label>
+								<span className="text-red-500">*</span>
+							</div>
+							<div className="w-full">
+								<input
+									onChange={(e) => setBusinessAddress(e.target.value)}
+									type="text"
+									placeholder="Address"
+									className="p-2 w-full md:text-2xl rounded-lg border border-gray-500 text-xl"
+								/>
+							</div>
+						</div>
+						<div className="text-xl">
+							<div>
+								<label>City/Area</label>
+								<span className="text-red-500">*</span>
+							</div>
+							<div className="w-full">
+								<input
+									onChange={(e) => setCity(e.target.value)}
+									type="text"
+									placeholder="City/Area"
+									className="p-2 w-full md:text-2xl rounded-lg border border-gray-500 text-xl"
+								/>
+							</div>
+						</div>
+						<div className="text-xl">
+							<div>
+								<label>Describe your service</label>
+								<span className="text-red-500">*</span>
+							</div>
+							<div className="w-full">
+								<textarea
+									onChange={(e) => setService(e.target.value)}
+									placeholder="Enter your text..."
+									className="p-2 h-28 w-full md:text-2xl rounded-lg border border-gray-500 text-xl"
+								></textarea>
+							</div>
+						</div>
+						<div className="text-xl">
+							<div>
+								<label>Your qualification(s)</label>
+							</div>
+							<div className="w-full">
+								<textarea
+									placeholder="e.g. Member of Phone repairers association"
+									className="p-2 h-28 w-full md:text-2xl rounded-lg border border-gray-500 text-xl"
+								></textarea>
+							</div>
+						</div>
+
+						<div className="text-xl">
+							<div>
+								<label>Upload a profile picture here</label>
+							</div>
+						</div>
+						<button className="text-white text-xl bg-slate-900 hover:bg-slate-950 py-3 my-2 rounded-md text-center transition duration-500 cursor-pointer w-full">
+							Proceed
+						</button>
 					</form>
 				</div>
 			</div>

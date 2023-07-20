@@ -1,4 +1,4 @@
-import Layout from "../components/Layout";
+import Layout from "../../../app/components/Layout";
 
 const page = () => {
 	return <Layout>your accounts</Layout>;

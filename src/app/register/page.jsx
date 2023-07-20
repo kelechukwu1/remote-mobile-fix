@@ -12,7 +12,7 @@ const page = () => {
 	const [city, setCity] = useState("");
 	const [service, setService] = useState("");
 
-	const handleSubmit = () => {
+	const handleSubmit = (e) => {
 		if (
 			businessName === "" ||
 			businessAddress === "" ||
@@ -20,6 +20,7 @@ const page = () => {
 			service === ""
 		) {
 			//validate the input fields
+			e.preventDefault();
 			router.push("/dashboard");
 		}
 	};

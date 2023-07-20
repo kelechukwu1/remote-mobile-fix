@@ -20,6 +20,7 @@ const page = () => {
 			service === ""
 		) {
 			//validate the input fields
+			router.push("/dashboard");
 		}
 	};
 

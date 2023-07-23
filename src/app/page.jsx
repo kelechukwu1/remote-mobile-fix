@@ -1,9 +1,17 @@
+"use client";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 
 export default function Home() {
+	const router = useRouter();
+
+	const handleSubmit = (e) => {
+		e.preventDefault();
+		router.push("question");
+	};
 	return (
 		<main>
-			<div>
+			<form onSubmit={handleSubmit}>
 				<div className="flex justify-between items-center shadow w-full">
 					<div
 						style={{
@@ -22,12 +30,12 @@ export default function Home() {
 								<div className="mb-3 w-full">
 									<input
 										type="text"
-										className="w-full p-3 px-4 rounded-sm bg-blue-100"
+										className="w-full p-3 px-4 text-xl rounded-sm bg-blue-100"
 										placeholder="Enter your area"
 									/>
 								</div>
 								<div className="sm:w-full md:w-48">
-									<button className="w-full text-blue-50 py-3 text-center bg-blue-600 hover:bg-blue-800 duration-300 ease-in-out rounded-sm cursor-pointer">
+									<button className="w-full text-blue-50 py-3 text-center text-xl bg-blue-600 hover:bg-blue-800 duration-300 ease-in-out rounded-sm cursor-pointer">
 										Go
 									</button>
 								</div>
@@ -35,14 +43,16 @@ export default function Home() {
 						</div>
 					</div>
 				</div>
-				<div className=" text-center p-5 shadow py-10">
+				<div className=" text-center text-xl px-10 shadow py-10">
 					<h1> Do you provide Phone Repair?</h1>
-					<Link className="text-blue-600" href="/register">
-						Register your business
-					</Link>
-					<h1>for free to get phone repair jobs near you.</h1>
+					<span>
+						<Link className="text-blue-600" href="/register">
+							Register your business
+						</Link>{" "}
+						for free to get phone repair jobs near you.
+					</span>
 				</div>
-			</div>
+			</form>
 		</main>
 	);
 }

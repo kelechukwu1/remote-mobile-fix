@@ -1,9 +1,9 @@
 "use client";
 
-import Link from "next/link";
 import { BsArrowLeft } from "react-icons/bs";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
+import { IoImageOutline } from "react-icons/io5";
 
 const page = () => {
 	const router = useRouter();
@@ -19,16 +19,19 @@ const page = () => {
 			city === "" ||
 			service === ""
 		) {
-			//validate the input fields
+			//validate the input fields here
+			window.alert("fill all fields");
+		} else {
+			//submit form
 			e.preventDefault();
 			router.push("/dashboard");
 		}
 	};
 
 	return (
-		<div className="bg-gray-100 py-5 ">
+		<div className="bg-gray-100 lg:bg-gray-50 py-5 md:px-36 lg:px-80">
 			<div
-				className="mx-10 mb-5 w-14 py-2 rounded-md bg-slate-900 hover:bg-slate-950 transition duration-500 text-white"
+				className="mx-6 mb-5 w-14 py-2 rounded-md cursor-pointer bg-slate-900 hover:bg-slate-950 transition duration-500 text-white"
 				onClick={() => router.push("/")}
 			>
 				<BsArrowLeft className="w-6 h-6 ml-4" />
@@ -104,7 +107,12 @@ const page = () => {
 						</div>
 
 						<div className="text-xl">
-							<div>
+							<div className="h-40 w-full justify-center items-center cursor-pointer rounded-lg flex bg-gray-50">
+								<div className=" justify-center items-center">
+									<IoImageOutline className="w-20 h-20" />
+								</div>
+							</div>
+							<div className="text-center mt-4">
 								<label>Upload a profile picture here</label>
 							</div>
 						</div>

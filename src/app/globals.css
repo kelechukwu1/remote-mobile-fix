@@ -2,7 +2,7 @@
 @tailwind components;
 @tailwind utilities;
 .mobileNav{
-  @apply md:hidden absolute right-8 top-16 w-32 bg-white rounded-lg overflow-hidden justify-center items-center flex transition-all duration-500 ease-in-out
+  @apply md:hidden absolute right-8 top-16 w-32 bg-white rounded-lg overflow-hidden text-xl justify-center items-center flex transition-all duration-500 ease-in-out
 }
 
 /* :root {

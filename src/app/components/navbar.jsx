@@ -108,9 +108,13 @@ const Navbar = () => {
 							className="w-full my-5 transition-all duration-500"
 						>
 							{navLinks.map(({ link, name }) => (
-								<Link href={link} key={name}>
+								<Link
+									href={link}
+									key={name}
+									className="justify-center items-center flex"
+								>
 									<div
-										className={`hover:bg-gray-50 px-6 py-2 rounded-sm ${
+										className={`hover:bg-gray-50 px-6 py-3 rounded-sm w-full ${
 											pathname.startsWith(link) ? "" : ""
 										}`}
 									>

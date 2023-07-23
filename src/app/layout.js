@@ -26,7 +26,7 @@ export default function RootLayout({ children }) {
 					<Navbar />
 				)}
 				{children}
-				<footer className="my-10 items-center justify-center">
+				<footer className="my-10 items-center justify-center text-xl">
 					<div className="text-center">Copyright &copy;Kelechukwu 2023</div>
 					<div className="text-center text-green-500">
 						<Link href="/about">About this project</Link>

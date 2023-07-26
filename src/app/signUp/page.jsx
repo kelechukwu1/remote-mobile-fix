@@ -95,9 +95,9 @@ const page = () => {
 		} else if (values.email != values.confirmEmail) {
 			setConfirmEmailErr("Email must match");
 		} else if (values.firstName === "") {
-			setFirstNameErr("Firstname must not be empty");
+			setFirstNameErr("Invalid field");
 		} else if (values.lastName === "") {
-			setLastNameErr("Lastname must not be empty");
+			setLastNameErr("Invalid field");
 		} else if (values.userName === "") {
 			setUserNameErr("Username must not be empty");
 		} else if (values.userName.length < 5) {
@@ -105,9 +105,9 @@ const page = () => {
 		} else if (values.phone === "") {
 			setPhoneErr("Provide a valid phone");
 		} else if (values.confirmPhone === "") {
-			setConfirmPhoneErr("Field must not be empty");
+			setConfirmPhoneErr("Invalid field");
 		} else if (values.confirmPhone != values.phone) {
-			setConfirmPhoneErr("Phone numbers must match");
+			setConfirmPhoneErr("Phone must match");
 		} else if (values.password === "") {
 			setPasswordErr("Password must not be empty");
 		} else if (values.password < 6) {
@@ -132,11 +132,11 @@ const page = () => {
 							name="email"
 							value={values.email}
 							type="text"
-							className="w-full p-3 border border-gray-500 rounded-lg text-xl"
+							className="w-full p-2 border border-gray-500 rounded-lg text-xl"
 							placeholder="Enter your email address"
 						/>
+						{emailErr && <div className="text-red-500 text-md">{emailErr}</div>}
 					</div>
-					{emailErr && <div className="text-red-500">{emailErr}</div>}
 					<div className=" mb-5">
 						<label className="text-xl">Confirm email address</label>
 						<input
@@ -144,13 +144,13 @@ const page = () => {
 							name="confirmEmail"
 							value={values.confirmEmail}
 							type="text"
-							className="w-full p-3 border border-gray-500 rounded-lg text-xl"
+							className="w-full p-2 border border-gray-500 rounded-lg text-xl"
 							placeholder="Enter your email address"
 						/>
+						{confirmEmailErr && (
+							<div className="text-red-500 text-md">{confirmEmailErr}</div>
+						)}
 					</div>
-					{confirmEmailErr && (
-						<div className="text-red-500">{confirmEmailErr}</div>
-					)}
 
 					<div className=" mb-5">
 						<label className="text-xl">Name</label>
@@ -161,9 +161,12 @@ const page = () => {
 									name="firstName"
 									value={values.firstName}
 									type="text"
-									className="w-full p-3 border border-gray-500 rounded-lg text-xl"
+									className="w-full p-2 border border-gray-500 rounded-lg text-xl"
 									placeholder="Firstname"
 								/>
+								{firstNameErr && (
+									<div className="text-red-500 text-md">{firstNameErr}</div>
+								)}
 							</div>
 							<div className="ml-1">
 								<input
@@ -171,16 +174,16 @@ const page = () => {
 									name="lastName"
 									value={values.lastName}
 									type="text"
-									className="w-full p-3 border border-gray-500 rounded-lg text-xl"
+									className="w-full p-2 border border-gray-500 rounded-lg text-xl"
 									placeholder="Lastname"
 								/>
+								{lastNameErr && (
+									<div className="text-red-500">{lastNameErr}</div>
+								)}
 							</div>
 						</div>
 					</div>
-					<div className="flex">
-						{firstNameErr && <div className="text-red-500">{firstNameErr}</div>}
-						{lastNameErr && <div className="text-red-500">{lastNameErr}</div>}
-					</div>
+
 					<div className=" mb-5">
 						<label className="text-xl">Username</label>
 						<input
@@ -188,11 +191,13 @@ const page = () => {
 							name="userName"
 							value={values.userName}
 							type="text"
-							className="w-full p-3 border border-gray-500 rounded-lg text-xl"
+							className="w-full p-2 border border-gray-500 rounded-lg text-xl"
 							placeholder=""
 						/>
+						{userNameErr && (
+							<div className="text-red-500 text-md">{userNameErr}</div>
+						)}
 					</div>
-					{userNameErr && <div className="text-red-500">{userNameErr}</div>}
 
 					<div className=" mb-5">
 						<label className="text-xl">Phone</label>
@@ -203,9 +208,12 @@ const page = () => {
 									name="phone"
 									value={values.phone}
 									type="text"
-									className="w-full p-3 border border-gray-500 rounded-lg text-xl"
+									className="w-full p-2 border border-gray-500 rounded-lg text-xl"
 									placeholder="phone"
 								/>
+								{phoneErr && (
+									<div className="text-red-500 text-md">{phoneErr}</div>
+								)}
 							</div>
 							<div className="ml-1 w-[1/2]">
 								<input
@@ -213,16 +221,13 @@ const page = () => {
 									name="confirmPhone"
 									value={values.confirmPhone}
 									type="text"
-									className="w-full p-3 border border-gray-500 rounded-lg text-xl"
+									className="w-full p-2 border border-gray-500 rounded-lg text-xl"
 									placeholder="confirm phone"
 								/>
+								{confirmPhoneErr && (
+									<div className="text-red-500 text-md">{confirmPhoneErr}</div>
+								)}
 							</div>
-						</div>
-						<div className="flex">
-							{phoneErr && <div className="text-red-500">{phoneErr}</div>}
-							{confirmPhoneErr && (
-								<div className="text-red-500">{confirmPhoneErr}</div>
-							)}
 						</div>
 					</div>
 					<div className=" mb-5">
@@ -232,11 +237,11 @@ const page = () => {
 							name="password"
 							value={values.password}
 							type="password"
-							className="w-full p-3 border border-gray-500 rounded-lg text-xl"
+							className="w-full p-2 border border-gray-500 rounded-lg text-xl"
 							placeholder="Enter your email address"
 						/>
+						{PasswordErr && <div className="text-red-500">{PasswordErr}</div>}
 					</div>
-					{PasswordErr && <div className="text-red-500">{PasswordErr}</div>}
 
 					<div className=" mb-5 flex">
 						<input
@@ -250,8 +255,8 @@ const page = () => {
 							I agree to the{" "}
 							<span className="text-blue-500">Terms of service</span>
 						</label>
+						{isCheckedErr && <div className="text-red-500">{isCheckedErr}</div>}
 					</div>
-					{isCheckedErr && <div className="text-red-500">{isCheckedErr}</div>}
 
 					<button className="mt-5 w-full p-3 text-xl bg-slate-900 hover:bg-slate-950 transition duration-500 text-white rounded-lg">
 						Register

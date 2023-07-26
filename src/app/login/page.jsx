@@ -65,7 +65,7 @@ const page = () => {
 					We're happy to have you back!
 				</div>
 
-				<form onSubmit={handleSubmit} className="flex flex-col gap-4">
+				<form onSubmit={handleSubmit} className="flex flex-col">
 					<input
 						onChange={(e) => {
 							setEmail(e.target.value);
@@ -76,13 +76,13 @@ const page = () => {
 						placeholder="Email"
 					/>
 					<div>
-						{emailErr && <div className="text-red-500 text-xl">{emailErr}</div>}
+						{emailErr && <div className="text-red-500 text-lg">{emailErr}</div>}
 						<input
 							onChange={(e) => {
 								setPassword(e.target.value);
 							}}
 							// onBlur={validatePassword}
-							className="w-full md:text-2xl p-3 rounded-lg border border-gray-500 text-xl"
+							className="w-full md:text-2xl p-3 mt-4 rounded-lg border border-gray-500 text-xl"
 							type="password"
 							name="password"
 							placeholder="Password"
@@ -90,10 +90,10 @@ const page = () => {
 						{/* eye svg logo here */}
 					</div>
 					{passwordErr && (
-						<div className="text-red-500 text-xl">{passwordErr}</div>
+						<div className="text-red-500 text-lg">{passwordErr}</div>
 					)}
 
-					<button className="text-center cursor-pointer bg-slate-900 hover:bg-slate-950 text-white md:text-2xl text-xl font-semibold py-3 rounded md:hover:scale-105 duration-300">
+					<button className=" mt-4 text-center cursor-pointer bg-slate-900 hover:bg-slate-950 text-white md:text-2xl text-xl font-semibold py-3 rounded md:hover:scale-105 duration-300">
 						Login
 					</button>
 					{/* {loginErr && <div className="text-red-500 text-xl">{loginErr}</div>} */}

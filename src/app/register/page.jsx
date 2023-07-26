@@ -2,7 +2,7 @@
 
 import { BsArrowLeft } from "react-icons/bs";
 import { useRouter } from "next/navigation";
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { IoImageOutline } from "react-icons/io5";
 
 const page = () => {
@@ -11,6 +11,22 @@ const page = () => {
 	const [businessAddress, setBusinessAddress] = useState("");
 	const [city, setCity] = useState("");
 	const [service, setService] = useState("");
+
+	const wrapperRef = useRef(null);
+	const [fileList, setFileList] = useState([]);
+	const onFileDrop = (e) => {
+		const newFile = e.target.files[0];
+		if (newFile) {
+			// const updatedList = [...fileList,newFile];
+			setFileList([newFile]);
+		}
+	};
+	const onDragEnter = () => wrapperRef.current.classList.add("opacity-80");
+	const onDrop = () => wrapperRef.current.classList.remove("opacity-80");
+	const onDragLeave = () => wrapperRef.current.classList.remove("opacity-80");
+	// const onFileChange = (files) => {
+	// 	console.log(files);
+	// };
 
 	const handleSubmit = (e) => {
 		if (
@@ -106,15 +122,45 @@ const page = () => {
 							</div>
 						</div>
 
-						<div className="text-xl">
-							<div className="h-40 w-full justify-center items-center cursor-pointer rounded-lg flex bg-gray-50">
-								<div className=" justify-center items-center">
-									<IoImageOutline className="w-20 h-20" />
+						<div
+							ref={wrapperRef}
+							onDragEnter={onDragEnter}
+							onDragLeave={onDragLeave}
+							onDrag={onDrop}
+							className="text-xl"
+						>
+							<div className="h-40 mb-5 w-full justify-center items-center cursor-pointer rounded-lg flex bg-gray-50 border-2 border-dashed border-gray-500">
+								<div className=" justify-center items-center hover:opacity-80">
+									<IoImageOutline className="w-20 h-20 hover:opacity-80" />
 								</div>
+								<input
+									onChange={onFileDrop}
+									// onFileChange={(files) => onFileChange(files)}
+									type="file"
+									value={""}
+									className="opacity-0 absolute w-full cursor-pointer h-40"
+								/>
 							</div>
 							<div className="text-center mt-4">
 								<label>Upload a profile picture here</label>
 							</div>
+							{fileList.length > 0 ? (
+								<div>
+									{" "}
+									{fileList.map((item, index) => (
+										<div
+											key={index}
+											className="justify-center flex items-center"
+										>
+											<img
+												src={`../images/${item.name}`}
+												alt=""
+												className=" rounded-xl"
+											/>
+										</div>
+									))}
+								</div>
+							) : null}
 						</div>
 						<button className="text-white text-xl bg-slate-900 hover:bg-slate-950 py-3 my-2 rounded-md text-center transition duration-500 cursor-pointer w-full">
 							Proceed

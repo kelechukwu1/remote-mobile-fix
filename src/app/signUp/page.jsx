@@ -243,13 +243,13 @@ const page = () => {
 						{PasswordErr && <div className="text-red-500">{PasswordErr}</div>}
 					</div>
 
-					<div className=" mb-5 flex">
+					<div className=" mb-5 flex items-center">
 						<input
 							onChange={() => {
 								!values.isChecked;
 							}}
 							type="checkbox"
-							className="mr-5 appearance-none h-32 w-32 border-2 rounded-3xl"
+							className="mr-5 cursor-pointer w-6 h-6 border-2 rounded-3xl"
 						/>
 						<label className="text-xl">
 							I agree to the{" "}

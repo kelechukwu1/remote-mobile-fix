@@ -1,6 +1,6 @@
 "use client";
 import Link from "next/link";
-import { useRouter, useNavigation } from "next/navigation";
+import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 
 // import { auth } from "../config/firebase";
@@ -9,8 +9,10 @@ import { useEffect, useState } from "react";
 const page = () => {
 	const navigate = useRouter();
 	const [email, setEmail] = useState("");
+	const [emailErr, setEmailErr] = useState("");
 	const [password, setPassword] = useState("");
-	const [loginErr, setLoginErr] = useState("");
+	const [passwordErr, setPasswordErr] = useState("");
+	// const [loginErr, setLoginErr] = useState("");
 
 	const loginWithEmailAndPassword = async () => {
 		// try {
@@ -19,58 +21,67 @@ const page = () => {
 		// 	console.log(email, "logged in");
 		// } catch (err) {
 		// 	setLoginErr(err.message);
-		navigate.push("dashboard");
 		// }
 	};
+	const handleSubmit = (e) => {
+		e.preventDefault();
+		//validate email input
+		const emailRe =
+			/^([a-zA-Z0-9_\-\.]+)@([a-zA-Z0-9_\-\.]+)\.([a-zA-Z]{2,5})$/;
+		if (!emailRe.test(email)) {
+			setEmailErr("please enter a valid email");
+			return emailErr;
+		}
+		//validate password input
+		const passwordRe = /^([a-zA-Z0-9_\-\.]+){6,12}$/;
+		if (!passwordRe.test(password)) {
+			setPasswordErr("password must not be less than 6 characters");
+			return passwordErr;
+		}
+		navigate.push("/dashboard");
+	};
 
-	// const loginWithGoogle = async () => {
-	// 	try {
-	// 		await loginWithGoogle(auth, signInWithPopup);
-	// 		navigate("/FlightForm");
-	// 		console.log(email, "logged in with google");
-	// 	} catch (err) {
-	// 		setLoginErr(err.message);
-	// 	}
-	// };
+	useEffect(() => {
+		let timeoutId;
 
-	// useEffect(() => {
-	// 	let timeoutId;
+		if (emailErr || passwordErr) {
+			timeoutId = setTimeout(() => {
+				setEmailErr("");
+				setPasswordErr("");
+			}, 3000);
+		}
 
-	// 	if (loginErr) {
-	// 		timeoutId = setTimeout(() => {
-	// 			setLoginErr("");
-	// 		}, 3000);
-	// 	}
-
-	// 	return () => {
-	// 		clearTimeout(timeoutId);
-	// 	};
-	// }, [loginErr]);
+		return () => {
+			clearTimeout(timeoutId);
+		};
+	}, [emailErr, passwordErr]);
 	return (
 		<section className="bg-gray-100 py-10">
-			<div className="bg-white rounded-2xl shadow-lg mx-5 px-5 text-center items-center py-10">
-				<div className="font-bold text-3xl md:text-5xl text-slate-900">
+			<div className="bg-white rounded-2xl shadow-lg mx-5 px-5 items-center py-10">
+				<div className="font-bold text-3xl md:text-5xl text-center text-slate-900">
 					Login
 				</div>
-				<div className="mt-4 text-slate-900 text-2xl font-bold md:text-2xl">
+				<div className="mt-4 text-center text-slate-900 text-2xl font-bold md:text-2xl">
 					We're happy to have you back!
 				</div>
 
-				<form className="flex flex-col gap-4">
+				<form onSubmit={handleSubmit} className="flex flex-col gap-4">
 					<input
 						onChange={(e) => {
 							setEmail(e.target.value);
 						}}
+						// onBlur={validateEmail}
 						className="p-3 md:text-2xl mt-8 rounded-lg border border-gray-500 text-xl"
-						type="email"
 						name="email"
 						placeholder="Email"
 					/>
 					<div>
+						{emailErr && <div className="text-red-500 text-xl">{emailErr}</div>}
 						<input
 							onChange={(e) => {
 								setPassword(e.target.value);
 							}}
+							// onBlur={validatePassword}
 							className="w-full md:text-2xl p-3 rounded-lg border border-gray-500 text-xl"
 							type="password"
 							name="password"
@@ -78,11 +89,13 @@ const page = () => {
 						/>
 						{/* eye svg logo here */}
 					</div>
-					<Link href="">
-						<div className="bg-slate-900 hover:bg-slate-950 text-white md:text-2xl text-xl font-semibold py-3 rounded md:hover:scale-105 duration-300">
-							Login
-						</div>
-					</Link>
+					{passwordErr && (
+						<div className="text-red-500 text-xl">{passwordErr}</div>
+					)}
+
+					<button className="text-center cursor-pointer bg-slate-900 hover:bg-slate-950 text-white md:text-2xl text-xl font-semibold py-3 rounded md:hover:scale-105 duration-300">
+						Login
+					</button>
 					{/* {loginErr && <div className="text-red-500 text-xl">{loginErr}</div>} */}
 				</form>
 				<div className="grid grid-cols-3 items-center justify-center mt-10 text-gray-500">
@@ -91,18 +104,16 @@ const page = () => {
 					<hr className="border-gray-500" />
 				</div>
 				<div>
-					<Link href={""}>
-						<div className="w-full py-3 bg-slate-200 text-xl md:text-2xl rounded border justify-center items-center mt-5 hover:scale-105 duration-300">
-							Login with Google
-						</div>
-					</Link>
+					<div className="text-center w-full py-3 bg-slate-200 text-xl md:text-2xl rounded border justify-center items-center mt-5 hover:scale-105 duration-300">
+						Login with Google
+					</div>
 				</div>
 				<Link href={""}>
-					<div className="text-xl md:text-2xl mt-3 border-b py-6 border-gray-500">
+					<div className="text-center text-xl md:text-2xl mt-3 border-b py-6 border-gray-500">
 						forgot your password?
 					</div>
 				</Link>
-				<div className="flex text-xl md:text-2xl justify-between items-center mt-5">
+				<div className="text-center flex text-xl md:text-2xl justify-between items-center mt-5">
 					<div>Don't have an account?</div>
 					<Link href={"/register"}>
 						<div className="py-2 md:text-2xl px-4 bg-slate-200 border rounded hover:scale-110 duration-300">

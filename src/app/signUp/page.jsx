@@ -238,7 +238,7 @@ const page = () => {
 							value={values.password}
 							type="password"
 							className="w-full p-2 border border-gray-500 rounded-lg text-xl"
-							placeholder="Enter your email address"
+							placeholder="Password"
 						/>
 						{PasswordErr && <div className="text-red-500">{PasswordErr}</div>}
 					</div>
@@ -249,9 +249,9 @@ const page = () => {
 								!values.isChecked;
 							}}
 							type="checkbox"
-							className="mr-5 cursor-pointer w-6 h-6 border-2 rounded-3xl"
+							className="mr-3 cursor-pointer w-6 h-6 border-2 rounded-3xl"
 						/>
-						<label className="text-xl">
+						<label className="text-md">
 							I agree to the{" "}
 							<span className="text-blue-500">Terms of service</span>
 						</label>

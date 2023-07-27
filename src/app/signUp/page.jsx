@@ -103,7 +103,7 @@ const page = () => {
 		} else if (values.userName.length < 5) {
 			setUserNameErr("Username must not be less than 5 char");
 		} else if (values.phone === "") {
-			setPhoneErr("Provide a valid phone");
+			setPhoneErr("Invalid field");
 		} else if (values.confirmPhone === "") {
 			setConfirmPhoneErr("Invalid field");
 		} else if (values.confirmPhone != values.phone) {

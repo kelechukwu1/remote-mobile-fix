@@ -126,25 +126,25 @@ const page = () => {
 				<form onSubmit={handleSubmit}>
 					<div className="text-center my-5 text-xl">Setup your account</div>
 					<div className=" mb-5">
-						<label className="text-xl">Email address</label>
+						<label className="text-md">Email address</label>
 						<input
 							onChange={handleChange}
 							name="email"
 							value={values.email}
 							type="text"
-							className="w-full p-2 border border-gray-500 rounded-lg text-xl"
+							className="w-full p-2 border border-gray-500 rounded-lg text-md"
 							placeholder="Enter your email address"
 						/>
 						{emailErr && <div className="text-red-500 text-md">{emailErr}</div>}
 					</div>
 					<div className=" mb-5">
-						<label className="text-xl">Confirm email address</label>
+						<label className="text-md">Confirm email address</label>
 						<input
 							onChange={handleChange}
 							name="confirmEmail"
 							value={values.confirmEmail}
 							type="text"
-							className="w-full p-2 border border-gray-500 rounded-lg text-xl"
+							className="w-full p-2 border border-gray-500 rounded-lg text-md"
 							placeholder="Enter your email address"
 						/>
 						{confirmEmailErr && (
@@ -153,7 +153,7 @@ const page = () => {
 					</div>
 
 					<div className=" mb-5">
-						<label className="text-xl">Name</label>
+						<label className="text-md">Name</label>
 						<div className="flex">
 							<div className="mr-1">
 								<input
@@ -161,7 +161,7 @@ const page = () => {
 									name="firstName"
 									value={values.firstName}
 									type="text"
-									className="w-full p-2 border border-gray-500 rounded-lg text-xl"
+									className="w-full p-2 border border-gray-500 rounded-lg text-md"
 									placeholder="Firstname"
 								/>
 								{firstNameErr && (
@@ -174,7 +174,7 @@ const page = () => {
 									name="lastName"
 									value={values.lastName}
 									type="text"
-									className="w-full p-2 border border-gray-500 rounded-lg text-xl"
+									className="w-full p-2 border border-gray-500 rounded-lg text-md"
 									placeholder="Lastname"
 								/>
 								{lastNameErr && (
@@ -185,13 +185,13 @@ const page = () => {
 					</div>
 
 					<div className=" mb-5">
-						<label className="text-xl">Username</label>
+						<label className="text-md">Username</label>
 						<input
 							onChange={handleChange}
 							name="userName"
 							value={values.userName}
 							type="text"
-							className="w-full p-2 border border-gray-500 rounded-lg text-xl"
+							className="w-full p-2 border border-gray-500 rounded-lg text-md"
 							placeholder=""
 						/>
 						{userNameErr && (
@@ -200,7 +200,7 @@ const page = () => {
 					</div>
 
 					<div className=" mb-5">
-						<label className="text-xl">Phone</label>
+						<label className="text-md">Phone</label>
 						<div className="flex">
 							<div className="mr-1 w-[1/2]">
 								<input
@@ -208,7 +208,7 @@ const page = () => {
 									name="phone"
 									value={values.phone}
 									type="text"
-									className="w-full p-2 border border-gray-500 rounded-lg text-xl"
+									className="w-full p-2 border border-gray-500 rounded-lg text-md"
 									placeholder="phone"
 								/>
 								{phoneErr && (
@@ -221,7 +221,7 @@ const page = () => {
 									name="confirmPhone"
 									value={values.confirmPhone}
 									type="text"
-									className="w-full p-2 border border-gray-500 rounded-lg text-xl"
+									className="w-full p-2 border border-gray-500 rounded-lg text-md"
 									placeholder="confirm phone"
 								/>
 								{confirmPhoneErr && (
@@ -231,13 +231,13 @@ const page = () => {
 						</div>
 					</div>
 					<div className=" mb-5">
-						<label className="text-xl">Password</label>
+						<label className="text-md">Password</label>
 						<input
 							onChange={handleChange}
 							name="password"
 							value={values.password}
 							type="password"
-							className="w-full p-2 border border-gray-500 rounded-lg text-xl"
+							className="w-full p-2 border border-gray-500 rounded-lg text-md"
 							placeholder="Password"
 						/>
 						{PasswordErr && <div className="text-red-500">{PasswordErr}</div>}
@@ -258,7 +258,7 @@ const page = () => {
 						{isCheckedErr && <div className="text-red-500">{isCheckedErr}</div>}
 					</div>
 
-					<button className="mt-5 w-full p-3 text-xl bg-slate-900 hover:bg-slate-950 transition duration-500 text-white rounded-lg">
+					<button className="mt-5 w-full p-3 text-md bg-slate-900 hover:bg-slate-950 transition duration-500 text-white rounded-lg">
 						Register
 					</button>
 				</form>

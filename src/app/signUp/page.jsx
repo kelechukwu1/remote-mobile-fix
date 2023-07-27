@@ -248,7 +248,7 @@ const page = () => {
 							{PasswordErr && <div className="text-red-500">{PasswordErr}</div>}
 						</div>
 
-						<div className=" mb-5 flex items-center">
+						<div className=" flex items-center">
 							<input
 								onChange={() => {
 									!values.isChecked;
@@ -260,10 +260,8 @@ const page = () => {
 								I agree to the{" "}
 								<span className="text-blue-500">Terms of service</span>
 							</label>
-							{isCheckedErr && (
-								<div className="text-red-500">{isCheckedErr}</div>
-							)}
 						</div>
+						{isCheckedErr && <div className="text-red-500">{isCheckedErr}</div>}
 
 						<button className="mt-5 w-full p-3 text-md bg-slate-900 hover:bg-slate-950 transition duration-500 text-white rounded-lg">
 							Register

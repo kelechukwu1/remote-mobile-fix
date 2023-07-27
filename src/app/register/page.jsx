@@ -108,7 +108,7 @@ const page = () => {
 			<div className="bg-white rounded-2xl shadow-lg mx-5 px-5 items-center py-10">
 				<div>
 					<form onSubmit={handleSubmit} className="flex flex-col">
-						<div className="text-xl">
+						<div className="text-md">
 							<div>
 								<label>Business name</label>
 								<span className="text-red-500">*</span>
@@ -120,12 +120,12 @@ const page = () => {
 									value={values.businessName}
 									name="businessName"
 									placeholder="Kelvin's AutoFix"
-									className="p-2 w-full md:text-2xl rounded-lg border border-gray-500 text-xl"
+									className="p-2 w-full md:text-2xl rounded-lg border border-gray-500 text-md"
 								/>
 							</div>
 							{berror && <div className="text-red-500 text-sm">{berror}</div>}
 						</div>
-						<div className="text-xl mt-4">
+						<div className="text-md mt-4">
 							<div>
 								<label>Where's your business?</label>
 								<span className="text-red-500">*</span>
@@ -137,12 +137,12 @@ const page = () => {
 									value={values.businessAddress}
 									name="businessAddress"
 									placeholder="Address"
-									className="p-2 w-full md:text-2xl rounded-lg border border-gray-500 text-xl"
+									className="p-2 w-full md:text-2xl rounded-lg border border-gray-500 text-md"
 								/>
 							</div>
 						</div>
 						{aerror && <div className="text-red-500 text-sm">{aerror}</div>}
-						<div className="text-xl mt-4">
+						<div className="text-md mt-4">
 							<div>
 								<label>City/Area</label>
 								<span className="text-red-500">*</span>
@@ -154,12 +154,12 @@ const page = () => {
 									value={values.businessCity}
 									name="businessCity"
 									placeholder="City/Area"
-									className="p-2 w-full md:text-2xl rounded-lg border border-gray-500 text-xl"
+									className="p-2 w-full md:text-2xl rounded-lg border border-gray-500 text-md"
 								/>
 							</div>
 						</div>
 						{cerror && <div className="text-red-500 text-sm">{cerror}</div>}
-						<div className="text-xl mt-4">
+						<div className="text-md mt-4">
 							<div>
 								<label>Describe your service</label>
 							</div>
@@ -168,12 +168,12 @@ const page = () => {
 									onChange={handleChange}
 									name="businessService"
 									placeholder="Enter your text..."
-									className="p-2 h-28 w-full md:text-2xl rounded-lg border border-gray-500 text-xl"
+									className="p-2 h-28 w-full md:text-2xl rounded-lg border border-gray-500 text-md"
 								></textarea>
 							</div>
 						</div>
 
-						<div className="text-xl">
+						<div className="text-md">
 							<div
 								onClick={handleImageClick}
 								className="h-40 mb-5 w-full justify-center items-center cursor-pointer rounded-lg flex bg-gray-50 border-2 border-dashed border-gray-500"
@@ -201,7 +201,7 @@ const page = () => {
 								) : null}
 							</div>
 						</div>
-						<button className="text-white text-xl bg-slate-900 hover:bg-slate-950 py-3 my-2 rounded-md text-center transition duration-500 cursor-pointer w-full">
+						<button className="text-white text-md bg-slate-900 hover:bg-slate-950 py-3 my-2 rounded-md text-center transition duration-500 cursor-pointer w-full">
 							Proceed
 						</button>
 					</form>

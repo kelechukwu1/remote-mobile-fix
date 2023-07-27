@@ -121,147 +121,155 @@ const page = () => {
 	};
 	return (
 		<>
-			<div className="m-10 ">
-				<div className="text-3xl">The easiest way to find new customers</div>
-				<form onSubmit={handleSubmit}>
-					<div className="text-center my-5 text-xl">Setup your account</div>
-					<div className=" mb-5">
-						<label className="text-md">Email address</label>
-						<input
-							onChange={handleChange}
-							name="email"
-							value={values.email}
-							type="text"
-							className="w-full p-2 border border-gray-500 rounded-lg text-md"
-							placeholder="Enter your email address"
-						/>
-						{emailErr && <div className="text-red-500 text-md">{emailErr}</div>}
-					</div>
-					<div className=" mb-5">
-						<label className="text-md">Confirm email address</label>
-						<input
-							onChange={handleChange}
-							name="confirmEmail"
-							value={values.confirmEmail}
-							type="text"
-							className="w-full p-2 border border-gray-500 rounded-lg text-md"
-							placeholder="Enter your email address"
-						/>
-						{confirmEmailErr && (
-							<div className="text-red-500 text-md">{confirmEmailErr}</div>
-						)}
-					</div>
+			<div className="bg-gray-100 lg:bg-gray-50 py-5 md:px-36 lg:px-80">
+				<div className="bg-white rounded-2xl shadow-lg mx-5 px-5 items-center py-10">
+					<div className="text-3xl">The easiest way to find new customers</div>
+					<form onSubmit={handleSubmit}>
+						<div className="text-center my-5 text-xl">Setup your account</div>
+						<div className=" mb-5">
+							<label className="text-md">Email address</label>
+							<input
+								onChange={handleChange}
+								name="email"
+								value={values.email}
+								type="text"
+								className="w-full p-2 border border-gray-500 rounded-lg text-md"
+								placeholder="Enter your email address"
+							/>
+							{emailErr && (
+								<div className="text-red-500 text-md">{emailErr}</div>
+							)}
+						</div>
+						<div className=" mb-5">
+							<label className="text-md">Confirm email address</label>
+							<input
+								onChange={handleChange}
+								name="confirmEmail"
+								value={values.confirmEmail}
+								type="text"
+								className="w-full p-2 border border-gray-500 rounded-lg text-md"
+								placeholder="Enter your email address"
+							/>
+							{confirmEmailErr && (
+								<div className="text-red-500 text-md">{confirmEmailErr}</div>
+							)}
+						</div>
 
-					<div className=" mb-5">
-						<label className="text-md">Name</label>
-						<div className="flex">
-							<div className="mr-1">
-								<input
-									onChange={handleChange}
-									name="firstName"
-									value={values.firstName}
-									type="text"
-									className="w-full p-2 border border-gray-500 rounded-lg text-md"
-									placeholder="Firstname"
-								/>
-								{firstNameErr && (
-									<div className="text-red-500 text-md">{firstNameErr}</div>
-								)}
-							</div>
-							<div className="ml-1">
-								<input
-									onChange={handleChange}
-									name="lastName"
-									value={values.lastName}
-									type="text"
-									className="w-full p-2 border border-gray-500 rounded-lg text-md"
-									placeholder="Lastname"
-								/>
-								{lastNameErr && (
-									<div className="text-red-500">{lastNameErr}</div>
-								)}
+						<div className=" mb-5">
+							<label className="text-md">Name</label>
+							<div className="flex">
+								<div className="mr-1">
+									<input
+										onChange={handleChange}
+										name="firstName"
+										value={values.firstName}
+										type="text"
+										className="w-full p-2 border border-gray-500 rounded-lg text-md"
+										placeholder="Firstname"
+									/>
+									{firstNameErr && (
+										<div className="text-red-500 text-md">{firstNameErr}</div>
+									)}
+								</div>
+								<div className="ml-1">
+									<input
+										onChange={handleChange}
+										name="lastName"
+										value={values.lastName}
+										type="text"
+										className="w-full p-2 border border-gray-500 rounded-lg text-md"
+										placeholder="Lastname"
+									/>
+									{lastNameErr && (
+										<div className="text-red-500">{lastNameErr}</div>
+									)}
+								</div>
 							</div>
 						</div>
-					</div>
 
-					<div className=" mb-5">
-						<label className="text-md">Username</label>
-						<input
-							onChange={handleChange}
-							name="userName"
-							value={values.userName}
-							type="text"
-							className="w-full p-2 border border-gray-500 rounded-lg text-md"
-							placeholder=""
-						/>
-						{userNameErr && (
-							<div className="text-red-500 text-md">{userNameErr}</div>
-						)}
-					</div>
+						<div className=" mb-5">
+							<label className="text-md">Username</label>
+							<input
+								onChange={handleChange}
+								name="userName"
+								value={values.userName}
+								type="text"
+								className="w-full p-2 border border-gray-500 rounded-lg text-md"
+								placeholder=""
+							/>
+							{userNameErr && (
+								<div className="text-red-500 text-md">{userNameErr}</div>
+							)}
+						</div>
 
-					<div className=" mb-5">
-						<label className="text-md">Phone</label>
-						<div className="flex">
-							<div className="mr-1 w-[1/2]">
-								<input
-									onChange={handleChange}
-									name="phone"
-									value={values.phone}
-									type="text"
-									className="w-full p-2 border border-gray-500 rounded-lg text-md"
-									placeholder="phone"
-								/>
-								{phoneErr && (
-									<div className="text-red-500 text-md">{phoneErr}</div>
-								)}
-							</div>
-							<div className="ml-1 w-[1/2]">
-								<input
-									onChange={handleChange}
-									name="confirmPhone"
-									value={values.confirmPhone}
-									type="text"
-									className="w-full p-2 border border-gray-500 rounded-lg text-md"
-									placeholder="confirm phone"
-								/>
-								{confirmPhoneErr && (
-									<div className="text-red-500 text-md">{confirmPhoneErr}</div>
-								)}
+						<div className=" mb-5">
+							<label className="text-md">Phone</label>
+							<div className="flex">
+								<div className="mr-1 w-[1/2]">
+									<input
+										onChange={handleChange}
+										name="phone"
+										value={values.phone}
+										type="text"
+										className="w-full p-2 border border-gray-500 rounded-lg text-md"
+										placeholder="phone"
+									/>
+									{phoneErr && (
+										<div className="text-red-500 text-md">{phoneErr}</div>
+									)}
+								</div>
+								<div className="ml-1 w-[1/2]">
+									<input
+										onChange={handleChange}
+										name="confirmPhone"
+										value={values.confirmPhone}
+										type="text"
+										className="w-full p-2 border border-gray-500 rounded-lg text-md"
+										placeholder="confirm phone"
+									/>
+									{confirmPhoneErr && (
+										<div className="text-red-500 text-md">
+											{confirmPhoneErr}
+										</div>
+									)}
+								</div>
 							</div>
 						</div>
-					</div>
-					<div className=" mb-5">
-						<label className="text-md">Password</label>
-						<input
-							onChange={handleChange}
-							name="password"
-							value={values.password}
-							type="password"
-							className="w-full p-2 border border-gray-500 rounded-lg text-md"
-							placeholder="Password"
-						/>
-						{PasswordErr && <div className="text-red-500">{PasswordErr}</div>}
-					</div>
+						<div className=" mb-5">
+							<label className="text-md">Password</label>
+							<input
+								onChange={handleChange}
+								name="password"
+								value={values.password}
+								type="password"
+								className="w-full p-2 border border-gray-500 rounded-lg text-md"
+								placeholder="Password"
+							/>
+							{PasswordErr && <div className="text-red-500">{PasswordErr}</div>}
+						</div>
 
-					<div className=" mb-5 flex items-center">
-						<input
-							onChange={() => {
-								!values.isChecked;
-							}}
-							type="checkbox"
-							className="mr-3 cursor-pointer w-6 h-6 border-2 rounded-3xl"
-						/>
-						<label className="text-md">
-							I agree to the{" "}
-							<span className="text-blue-500">Terms of service</span>
-						</label>
-						{isCheckedErr && <div className="text-red-500">{isCheckedErr}</div>}
-					</div>
+						<div className=" mb-5 flex items-center">
+							<input
+								onChange={() => {
+									!values.isChecked;
+								}}
+								type="checkbox"
+								className="mr-3 cursor-pointer w-6 h-6 border-2 rounded-3xl"
+							/>
+							<label className="text-md">
+								I agree to the{" "}
+								<span className="text-blue-500">Terms of service</span>
+							</label>
+							{isCheckedErr && (
+								<div className="text-red-500">{isCheckedErr}</div>
+							)}
+						</div>
 
-					<button className="mt-5 w-full p-3 text-md bg-slate-900 hover:bg-slate-950 transition duration-500 text-white rounded-lg">
-						Register
-					</button>
-				</form>
+						<button className="mt-5 w-full p-3 text-md bg-slate-900 hover:bg-slate-950 transition duration-500 text-white rounded-lg">
+							Register
+						</button>
+					</form>
+				</div>
 			</div>
 		</>
 	);

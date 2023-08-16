@@ -44,25 +44,6 @@ const page = () => {
 	const [aerror, setAError] = useState("");
 	const [cerror, setCError] = useState("");
 
-	// //validation logic wey no gree work for handleSubmit function
-	// const validateInput = () => {
-	// 	//validate name input
-	// 	const nameRe = /^[a-zA-Z]{2,15}$/;
-	// 	if (!nameRe.test(values.businessName)) {
-	// 		setBError("Name must be between 2 to 15 characters long");
-	// 	}
-	// 	//validate address input
-	// 	const addressRe = /^[a-zA-Z]{2,30}\w$/;
-	// 	if (!addressRe.test(values.businessAddress)) {
-	// 		setAError("Enter a valid address");
-	// 	}
-	// 	//validate city input
-	// 	const cityRe = /^[a-zA-Z]{2,10}\w$/;
-	// 	if (!cityRe.test(values.businessCity)) {
-	// 		setCError("Enter a valid city");
-	// 	}
-	// };
-
 	//clear error function
 	useEffect(() => {
 		let timeoutId;

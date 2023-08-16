@@ -2,9 +2,15 @@
 
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
+import { db } from "../config/firebase";
+import { addDoc, collection } from "firebase/firestore";
+import { auth } from "../config/firebase";
+import { createUserWithEmailAndPassword } from "firebase/auth";
 
 const page = () => {
 	const router = useRouter();
+	//firestore repairers ref
+	const initialRepairersRef = collection(db, "repairers");
 
 	//FUNCTIONS BELOW TAKES CARE OF INPUT VALIDATIONS AND SUBMIT EVENTS
 	//get form values
@@ -79,16 +85,17 @@ const page = () => {
 		isCheckedErr,
 	]);
 
-	const handleSubmit = (e) => {
+	const handleSubmit = async (e) => {
 		e.preventDefault();
+		//email regex
 		const emailRegEx =
 			/^([a-zA-Z0-9_\-\.]+)@([a-zA-Z0-9_\-\.]+)\.([a-zA-Z]{2,5})$/;
-		//name input regEx
-		const nameRe = /^[a-zA-Z]{2,15}$/;
-		//address input regEx
-		const addressRe = /^[a-zA-Z]{2,30}\w$/;
-		//city input regEx
-		const cityRe = /^[a-zA-Z]{2,10}\w$/;
+		// //name input regEx
+		// const nameRe = /^[a-zA-Z]{2,15}$/;
+		// //address input regEx
+		// const addressRe = /^[a-zA-Z]{2,30}\w$/;
+		// //city input regEx
+		// const cityRe = /^[a-zA-Z]{2,10}\w$/;
 
 		if (!emailRegEx.test(values.email)) {
 			setEmailErr("Input a valid email");
@@ -117,6 +124,22 @@ const page = () => {
 		} else {
 			//redirect the page
 			router.push("/dashboard");
+		}
+		//add data to firebase
+		await addDoc(initialRepairersRef, {
+			email: values.email,
+			firstName: values.firstName,
+			lastName: values.lastName,
+			userName: values.userName,
+			phone: values.phone,
+			password: values.password,
+		});
+		//implement firebase auth sign up
+		try {
+			await createUserWithEmailAndPassword(auth, values.email, values.password);
+			console.log(email, "has been created");
+		} catch (err) {
+			setSignupErr(err.message);
 		}
 	};
 	return (
@@ -263,7 +286,10 @@ const page = () => {
 						</div>
 						{isCheckedErr && <div className="text-red-500">{isCheckedErr}</div>}
 
-						<button className="mt-5 w-full p-3 text-md bg-slate-900 hover:bg-slate-950 transition duration-500 text-white rounded-lg">
+						<button
+							className="mt-5 w-full p-3 text-md bg-slate-900 hover:bg-slate-950 transition duration-500 text-white rounded-lg"
+							type="submit"
+						>
 							Register
 						</button>
 					</form>

@@ -4,21 +4,25 @@ import { useEffect, useRef, useState } from "react";
 import { BsArrowLeft } from "react-icons/bs";
 import { useRouter } from "next/navigation";
 import { IoImageOutline } from "react-icons/io5";
+import { db } from "../config/firebase";
+import { addDoc, collection } from "firebase/firestore";
+import { storage } from "../config/firebase";
+import { ref, uploadBytes } from "firebase/storage";
 // import validations from "../components/validations";
 
 const page = () => {
 	const router = useRouter();
+	//firestore repairers ref
+	const initialRepairersRef = collection(db, "repairers");
+
 	//FUNCTIONS HERE TAKES CARE OF IMAGE FILE UPLOAD
 	//input ref for file upload
 	const inputRef = useRef(null);
 	const [image, setImage] = useState("");
-	const handleImageClick = () => {
-		inputRef.current.click();
-	};
+
 	const handleImageChange = (e) => {
 		const file = e.target.files[0];
-		console.log(file);
-		setImage(e.target.files[0]);
+		setImage(file);
 	};
 
 	//FUNCTIONS BELOW TAKES CARE OF INPUT VALIDATIONS AND SUBMIT EVENTS
@@ -76,7 +80,7 @@ const page = () => {
 		};
 	}, [aerror, berror, cerror]);
 
-	const handleSubmit = (e) => {
+	const handleSubmit = async (e) => {
 		e.preventDefault();
 		//validate name input
 		const nameRe = /^[a-zA-Z]{2,15}$/;
@@ -96,16 +100,24 @@ const page = () => {
 			//redirect the page
 			router.push("/signUp");
 		}
+		await addDoc(initialRepairersRef, {
+			businessName: values.businessName,
+			businessAddress: values.businessAddress,
+			businessCity: values.businessCity,
+			businessDescription: values.businessDescription,
+		});
+		const imageRef = ref(storage, `images/${image.name}`);
+		uploadBytes(imageRef, image);
 	};
 	return (
-		<div className="bg-gray-100 lg:bg-gray-50 py-5 md:px-36 lg:px-80">
+		<div className="py-5 bg-gray-100 lg:bg-gray-50 md:px-36 lg:px-80">
 			<div
-				className="mx-6 mb-5 w-14 py-2 rounded-md cursor-pointer bg-slate-900 hover:bg-slate-950 transition duration-500 text-white"
+				className="py-2 mx-6 mb-5 text-white transition duration-500 rounded-md cursor-pointer w-14 bg-slate-900 hover:bg-slate-950"
 				onClick={() => router.push("/")}
 			>
 				<BsArrowLeft className="w-6 h-6 ml-4" />
 			</div>
-			<div className="bg-white rounded-2xl shadow-lg mx-5 px-5 items-center py-10">
+			<div className="items-center px-5 py-10 mx-5 bg-white shadow-lg rounded-2xl">
 				<div>
 					<form onSubmit={handleSubmit} className="flex flex-col">
 						<div className="text-md">
@@ -120,12 +132,12 @@ const page = () => {
 									value={values.businessName}
 									name="businessName"
 									placeholder="Kelvin's AutoFix"
-									className="p-2 w-full md:text-2xl rounded-lg border border-gray-500 text-md"
+									className="w-full p-2 border border-gray-500 rounded-lg md:text-2xl text-md"
 								/>
 							</div>
-							{berror && <div className="text-red-500 text-sm">{berror}</div>}
+							{berror && <div className="text-sm text-red-500">{berror}</div>}
 						</div>
-						<div className="text-md mt-4">
+						<div className="mt-4 text-md">
 							<div>
 								<label>Where's your business?</label>
 								<span className="text-red-500">*</span>
@@ -137,12 +149,12 @@ const page = () => {
 									value={values.businessAddress}
 									name="businessAddress"
 									placeholder="Address"
-									className="p-2 w-full md:text-2xl rounded-lg border border-gray-500 text-md"
+									className="w-full p-2 border border-gray-500 rounded-lg md:text-2xl text-md"
 								/>
 							</div>
 						</div>
-						{aerror && <div className="text-red-500 text-sm">{aerror}</div>}
-						<div className="text-md mt-4">
+						{aerror && <div className="text-sm text-red-500">{aerror}</div>}
+						<div className="mt-4 text-md">
 							<div>
 								<label>City/Area</label>
 								<span className="text-red-500">*</span>
@@ -154,12 +166,12 @@ const page = () => {
 									value={values.businessCity}
 									name="businessCity"
 									placeholder="City/Area"
-									className="p-2 w-full md:text-2xl rounded-lg border border-gray-500 text-md"
+									className="w-full p-2 border border-gray-500 rounded-lg md:text-2xl text-md"
 								/>
 							</div>
 						</div>
-						{cerror && <div className="text-red-500 text-sm">{cerror}</div>}
-						<div className="text-md mt-4">
+						{cerror && <div className="text-sm text-red-500">{cerror}</div>}
+						<div className="mt-4 text-md">
 							<div>
 								<label>Describe your service</label>
 							</div>
@@ -168,17 +180,14 @@ const page = () => {
 									onChange={handleChange}
 									name="businessService"
 									placeholder="Enter your text..."
-									className="p-2 h-28 w-full md:text-2xl rounded-lg border border-gray-500 text-md"
+									className="w-full p-2 border border-gray-500 rounded-lg h-28 md:text-2xl text-md"
 								></textarea>
 							</div>
 						</div>
 
 						<div className="text-md">
-							<div
-								onClick={handleImageClick}
-								className="h-40 mb-5 w-full justify-center items-center cursor-pointer rounded-lg flex bg-gray-50 border-2 border-dashed border-gray-500"
-							>
-								<div className=" justify-center items-center hover:opacity-80">
+							<div className="flex items-center justify-center w-full h-40 mb-5 border-2 border-gray-500 border-dashed rounded-lg cursor-pointer bg-gray-50">
+								<div className="items-center justify-center hover:opacity-80">
 									<IoImageOutline className="w-20 h-20 hover:opacity-80" />
 								</div>
 								<input
@@ -186,13 +195,13 @@ const page = () => {
 									onChange={handleImageChange}
 									type="file"
 									// value={""}
-									className="opacity-0 absolute w-full cursor-pointer h-40"
+									className="absolute w-full h-40 opacity-0 cursor-pointer"
 								/>
 							</div>
-							<div className="text-center mt-4">
+							<div className="mt-4 text-center">
 								<label>Upload a profile picture here</label>
 							</div>
-							<div className="flex justify-center items-center">
+							<div className="flex items-center justify-center">
 								{image ? (
 									<img
 										src={URL.createObjectURL(image)}
@@ -201,7 +210,10 @@ const page = () => {
 								) : null}
 							</div>
 						</div>
-						<button className="text-white text-md bg-slate-900 hover:bg-slate-950 py-3 my-2 rounded-md text-center transition duration-500 cursor-pointer w-full">
+						<button
+							className="w-full py-3 my-2 text-center text-white transition duration-500 rounded-md cursor-pointer text-md bg-slate-900 hover:bg-slate-950"
+							type="submit"
+						>
 							Proceed
 						</button>
 					</form>

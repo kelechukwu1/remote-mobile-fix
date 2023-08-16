@@ -5,6 +5,9 @@ import DashboardNav from "./components/dashboardNav";
 import "./globals.css";
 import { Inter } from "next/font/google";
 import { usePathname } from "next/navigation";
+import { Provider } from "react-redux";
+import { configureStore } from "@reduxjs/toolkit";
+import { userInfoSlice } from "./store";
 const inter = Inter({ subsets: ["latin"] });
 
 // export const metadata = {
@@ -14,25 +17,35 @@ const inter = Inter({ subsets: ["latin"] });
 
 export default function RootLayout({ children }) {
 	const pathname = usePathname();
+	//redux store reducers
+	const store = configureStore({
+		reducer: {
+			locations: userInfoSlice.reducer,
+		},
+	});
 	return (
-		<html lang="en">
-			<body className={inter.className}>
-				{pathname === "/dashboard" ||
-				pathname === "/requests" ||
-				pathname === "/account" ||
-				pathname === "/settings" ? (
-					<DashboardNav />
-				) : (
-					<Navbar />
-				)}
-				{children}
-				<footer className="my-10 items-center justify-center text-lg">
-					<div className="text-center">Copyright &copy;Kelechukwu 2023</div>
-					<div className="text-center text-green-500">
-						<Link href="/about">About this project</Link>
-					</div>
-				</footer>
-			</body>
-		</html>
+		<Provider store={store}>
+			<html lang="en">
+				<body className={inter.className}>
+					{pathname === "/dashboard" ||
+					pathname === "/requests" ||
+					pathname === "/account" ||
+					pathname === "/settings" ? (
+						<DashboardNav />
+					) : (
+						<Navbar />
+					)}
+					{children}
+					{pathname !== "/login" && (
+						<footer className="items-center justify-center my-10 text-md">
+							<div className="text-center">Copyright &copy;Kelechukwu 2023</div>
+							<div className="text-center text-green-500">
+								<Link href="/about">About this project</Link>
+							</div>
+						</footer>
+					)}
+				</body>
+			</html>
+		</Provider>
 	);
 }

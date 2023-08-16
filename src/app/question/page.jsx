@@ -2,15 +2,53 @@
 
 import { BsArrowLeft } from "react-icons/bs";
 import { useRouter } from "next/navigation";
-import { useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import Link from "next/link";
+import { useDispatch } from "react-redux";
+import { addUserInfo } from "../store";
 
 const page = () => {
+	//init nextJs router navigation
 	const router = useRouter();
-	const handleRef = useRef();
+	//initialize the rtk dispatch method
+	const dispatch = useDispatch();
+	// create state for the input fields
+	const [email, setEmail] = useState("");
+	const [phone, setPhone] = useState("");
+	// create state for the input field errors
+	const [emailErr, setEmailErr] = useState("");
+	const [phoneErr, setPhoneErr] = useState("");
+	// const handleRef = useRef();
+	// console.log(handleRef);
+
+	//clear input error function
+	useEffect(() => {
+		let timeoutId;
+
+		if (setEmailErr || setPhoneErr) {
+			timeoutId = setTimeout(() => {
+				setEmailErr("");
+				setPhoneErr("");
+			}, 3000);
+		}
+
+		return () => {
+			clearTimeout(timeoutId);
+		};
+	}, [emailErr, phoneErr]);
+	//handleSubmit function
 	const handleSubmit = (e) => {
 		e.preventDefault();
-		router.push("/problemDescription");
+		const emailRegEx =
+			/^([a-zA-Z0-9_\-\.]+)@([a-zA-Z0-9_\-\.]+)\.([a-zA-Z]{2,5})$/;
+		if (!emailRegEx.test(email)) {
+			setEmailErr("Please enter a valid email");
+		} else if (phone === "") {
+			setPhoneErr("Field must not be empty");
+		} else {
+			dispatch(addUserInfo({ email, phone }));
+			router.push("/problemDescription");
+		}
 	};
 
 	return (
@@ -23,38 +61,33 @@ const page = () => {
 			</div>
 			<div className="mx-6 gap-4">
 				<form onSubmit={handleSubmit}>
-					<div className="text-xl">How would you like to be contacted?</div>
-					<div className="justify-center flex mb-3">
-						<select
-							className="w-full p-3 rounded-lg text-xl"
-							onChange={handleRef}
-						>
-							<option value="one">Through WhatsApp</option>
-							<option value="one">Through email</option>
-							<option value="one">Through phone call</option>
-						</select>
+					<div className="text-2xl font-semibold mb-5 text-center">
+						We would like to contact you
 					</div>
-					{handleRef.current && (
-						<div>
-							<div>Enter your WhatsApp number</div>
-							<input type="text" placeholder="+234.........." />
-						</div>
-					)}
+
 					<div className="text-xl mb-3">
 						<div>Enter your email</div>
 						<input
+							onChange={(e) => {
+								setEmail(e.target.value);
+							}}
 							type="text"
 							placeholder="test@test.com"
 							className="w-full p-3 rounded-lg text-xl"
 						/>
+						{emailErr && <div className="pt-2 text-red-500">{emailErr}</div>}
 					</div>
 					<div className="text-xl mb-3">
 						<div>Enter your phone number</div>
 						<input
+							onChange={(e) => {
+								setPhone(e.target.value);
+							}}
 							type="text"
 							placeholder="+234.........."
 							className="w-full p-3 rounded-lg text-xl"
 						/>
+						{phoneErr && <div className="pt-2 text-red-500">{phoneErr}</div>}
 					</div>
 					<div className="flex justify-between mt-4">
 						<div>

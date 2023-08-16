@@ -4,8 +4,6 @@ const localStorageLocation = localStorage.getItem("userInfo");
 const parsedLocalStorageLocation = localStorageLocation
 	? JSON.parse(localStorageLocation)
 	: [];
-// console.log(localStorageLocation);
-// console.log(parsedLocalStorageLocation);
 
 const initialState = {
 	value: parsedLocalStorageLocation,
@@ -16,8 +14,11 @@ export const userInfoSlice = createSlice({
 	initialState,
 	reducers: {
 		addUserInfo: (state, action) => {
-			state.value.push(action.payload);
-			console.log(state.value);
+			// state.value.push(action.payload);
+			// console.log(state.value);
+			// Create a new array with the updated value
+			const updatedValue = [...state.value, action.payload];
+			state.value = updatedValue; // Update the state
 			localStorage.setItem("userInfo", JSON.stringify(state.value));
 		},
 	},

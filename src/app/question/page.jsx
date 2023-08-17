@@ -75,7 +75,9 @@ const page = () => {
 							placeholder="test@test.com"
 							className="w-full p-3 rounded-lg text-xl"
 						/>
-						{emailErr && <div className="pt-2 text-red-500">{emailErr}</div>}
+						{emailErr && (
+							<div className="pt-2 text-red-500 text-sm">{emailErr}</div>
+						)}
 					</div>
 					<div className="text-xl mb-3">
 						<div>Enter your phone number</div>
@@ -87,7 +89,9 @@ const page = () => {
 							placeholder="+234.........."
 							className="w-full p-3 rounded-lg text-xl"
 						/>
-						{phoneErr && <div className="pt-2 text-red-500">{phoneErr}</div>}
+						{phoneErr && (
+							<div className="pt-2 text-red-500 text-sm">{phoneErr}</div>
+						)}
 					</div>
 					<div className="flex justify-between mt-4">
 						<div>

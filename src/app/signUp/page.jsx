@@ -139,7 +139,7 @@ const page = () => {
 			await createUserWithEmailAndPassword(auth, values.email, values.password);
 			console.log(email, "has been created");
 		} catch (err) {
-			setSignupErr(err.message);
+			console.error(err.message);
 		}
 	};
 	return (

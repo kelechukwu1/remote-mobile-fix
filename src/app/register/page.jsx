@@ -104,7 +104,7 @@ const page = () => {
 						<div className="text-md">
 							<div>
 								<label>Business name</label>
-								<span className="text-red-500">*</span>
+								<span className="text-red-500 text-sm">*</span>
 							</div>
 							<div>
 								<input

@@ -160,7 +160,7 @@ const page = () => {
 								placeholder="Enter your email address"
 							/>
 							{emailErr && (
-								<div className="text-red-500 text-md">{emailErr}</div>
+								<div className="text-red-500 text-sm">{emailErr}</div>
 							)}
 						</div>
 						<div className=" mb-5">
@@ -174,7 +174,7 @@ const page = () => {
 								placeholder="Enter your email address"
 							/>
 							{confirmEmailErr && (
-								<div className="text-red-500 text-md">{confirmEmailErr}</div>
+								<div className="text-red-500 text-sm">{confirmEmailErr}</div>
 							)}
 						</div>
 
@@ -191,7 +191,7 @@ const page = () => {
 										placeholder="Firstname"
 									/>
 									{firstNameErr && (
-										<div className="text-red-500 text-md">{firstNameErr}</div>
+										<div className="text-red-500 text-sm">{firstNameErr}</div>
 									)}
 								</div>
 								<div className="ml-1">
@@ -204,7 +204,7 @@ const page = () => {
 										placeholder="Lastname"
 									/>
 									{lastNameErr && (
-										<div className="text-red-500">{lastNameErr}</div>
+										<div className="text-red-500 text-sm">{lastNameErr}</div>
 									)}
 								</div>
 							</div>
@@ -221,7 +221,7 @@ const page = () => {
 								placeholder=""
 							/>
 							{userNameErr && (
-								<div className="text-red-500 text-md">{userNameErr}</div>
+								<div className="text-red-500 text-sm">{userNameErr}</div>
 							)}
 						</div>
 
@@ -238,7 +238,7 @@ const page = () => {
 										placeholder="phone"
 									/>
 									{phoneErr && (
-										<div className="text-red-500 text-md">{phoneErr}</div>
+										<div className="text-red-500 text-sm">{phoneErr}</div>
 									)}
 								</div>
 								<div className="ml-1 w-[1/2]">
@@ -251,7 +251,7 @@ const page = () => {
 										placeholder="confirm phone"
 									/>
 									{confirmPhoneErr && (
-										<div className="text-red-500 text-md">
+										<div className="text-red-500 text-sm">
 											{confirmPhoneErr}
 										</div>
 									)}
@@ -268,7 +268,9 @@ const page = () => {
 								className="w-full p-2 border border-gray-500 rounded-lg text-md"
 								placeholder="Password"
 							/>
-							{PasswordErr && <div className="text-red-500">{PasswordErr}</div>}
+							{PasswordErr && (
+								<div className="text-red-500 text-sm">{PasswordErr}</div>
+							)}
 						</div>
 
 						<div className=" flex items-center">
@@ -284,7 +286,9 @@ const page = () => {
 								<span className="text-blue-500">Terms of service</span>
 							</label>
 						</div>
-						{isCheckedErr && <div className="text-red-500">{isCheckedErr}</div>}
+						{isCheckedErr && (
+							<div className="text-red-500 text-sm">{isCheckedErr}</div>
+						)}
 
 						<button
 							className="mt-5 w-full p-3 text-md bg-slate-900 hover:bg-slate-950 transition duration-500 text-white rounded-lg"

@@ -76,7 +76,7 @@ const page = () => {
 						placeholder="Email"
 					/>
 					<div>
-						{emailErr && <div className="text-red-500 text-md">{emailErr}</div>}
+						{emailErr && <div className="text-red-500 text-sm">{emailErr}</div>}
 						<input
 							onChange={(e) => {
 								setPassword(e.target.value);
@@ -90,7 +90,7 @@ const page = () => {
 						{/* eye svg logo here */}
 					</div>
 					{passwordErr && (
-						<div className="text-red-500 text-md">{passwordErr}</div>
+						<div className="text-red-500 text-sm">{passwordErr}</div>
 					)}
 
 					<button className=" mt-4 text-center cursor-pointer bg-slate-900 hover:bg-slate-950 focus:ring-gray-500 text-white md:text-2xl text-xl font-semibold py-3 rounded md:hover:scale-105 duration-300">

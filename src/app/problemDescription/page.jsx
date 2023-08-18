@@ -67,7 +67,7 @@ const page = () => {
 							className="p-2 h-28 w-full md:text-2xl rounded-lg border border-gray-500 text-xl"
 						></textarea>
 						{descriptionErr && (
-							<div className="pt-2 text-red-500">{descriptionErr}</div>
+							<div className="pt-2 text-red-500 text-sm">{descriptionErr}</div>
 						)}
 					</div>
 					<div className="text-xl border p-5 bg-gray-50 rounded-lg mt-5">

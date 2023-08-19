@@ -76,7 +76,7 @@ export default function Home() {
 						</div>
 					</div>
 				</div>
-				<div className="px-10 py-10 text-xl text-center shadow ">
+				<div className="px-10 py-10 text-md text-center shadow ">
 					<h1> Do you provide Phone Repair?</h1>
 					<span>
 						<Link className="text-blue-600" href="/register">

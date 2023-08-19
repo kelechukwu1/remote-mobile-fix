@@ -79,11 +79,11 @@ const page = () => {
 								<div className="text-gray-500">
 									Spec360 phone repairs, <br /> tetlow, Owerri.
 								</div>
+								<div className="text-gray-500 ">09063646331</div>
 							</div>
 						</div>
 						<hr className="my-3" />
 						<div className="flex justify-around px-1">
-							<div className="text-gray-500 text-sm">09063646331</div>
 							<div className="text-gray-500 text-sm">
 								obiefunakelechukwu@gmail.com
 							</div>
@@ -105,11 +105,11 @@ const page = () => {
 								<div className="text-gray-500">
 									Spec360 phone repairs, <br /> tetlow, Owerri.
 								</div>
+								<div className="text-gray-500">09063646331</div>
 							</div>
 						</div>
 						<hr className="my-3" />
 						<div className="flex justify-around px-1">
-							<div className="text-gray-500 text-sm">09063646331</div>
 							<div className="text-gray-500 text-sm">
 								obiefunakelechukwu@gmail.com
 							</div>

@@ -64,7 +64,7 @@ export default function Home() {
 										placeholder="Enter your area"
 									/>
 									{inputerr && (
-										<div className="pt-2 text-red-500">{inputerr}</div>
+										<div className="pt-2 text-sm text-red-500">{inputerr}</div>
 									)}
 								</div>
 								<div className="sm:w-full md:w-48">
@@ -76,7 +76,7 @@ export default function Home() {
 						</div>
 					</div>
 				</div>
-				<div className="px-10 py-10 text-md text-center shadow ">
+				<div className="px-10 py-10 text-center shadow text-md ">
 					<h1> Do you provide Phone Repair?</h1>
 					<span>
 						<Link className="text-blue-600" href="/register">

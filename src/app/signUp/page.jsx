@@ -152,7 +152,6 @@ const page = () => {
 					values.email,
 					values.password
 				);
-				console.log(values.email, "has been created");
 			} catch (err) {
 				console.error(err.message);
 			}

@@ -21,7 +21,6 @@ export default function RootLayout({ children }) {
 	const store = configureStore({
 		reducer: {
 			user: userSlice.reducer,
-			// repairers: repairerSlice.reducer,
 		},
 	});
 	return (

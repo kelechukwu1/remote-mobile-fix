@@ -9,7 +9,7 @@ import { db } from "../config/firebase";
 import { addDoc, collection } from "firebase/firestore";
 import { storage } from "../config/firebase";
 import { ref, uploadBytes } from "firebase/storage";
-import { setNewDocId } from "../store";
+import { setNewRepairerId } from "../store";
 
 // import validations from "../components/validations";
 
@@ -99,7 +99,7 @@ const page = () => {
 			//redirect the page
 			router.push("/signUp");
 			//dispatch to rtk store
-			dispatch(setNewDocId(newDocRef.id));
+			dispatch(setNewRepairerId(newDocRef.id));
 		}
 	};
 

@@ -2,8 +2,8 @@
 import { useRouter } from "next/navigation";
 import { useState, useEffect, useRef } from "react";
 import { IoImageOutline } from "react-icons/io5";
-import { useDispatch } from "react-redux";
-import { addUserInfo } from "../store";
+// import { useDispatch } from "react-redux";
+// import { addUserInfo } from "../store";
 import { storage } from "../config/firebase";
 import { ref, uploadBytes } from "firebase/storage";
 
@@ -11,7 +11,7 @@ const page = () => {
 	//init nextJs navigation
 	const router = useRouter();
 	//init rtk dispatch method
-	const dispatch = useDispatch();
+	// const dispatch = useDispatch();
 
 	//input ref for file upload
 	const inputRef = useRef(null);
@@ -45,7 +45,7 @@ const page = () => {
 		if (description === "") {
 			setDescriptionErr("description field required");
 		} else {
-			dispatch(addUserInfo({ description }));
+			// dispatch(addUserInfo({ description }));
 			router.push("/thanks");
 			const imageRef = ref(storage, `images/${image.name}`);
 			uploadBytes(imageRef, image);

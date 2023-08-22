@@ -2,8 +2,6 @@
 import { useRouter } from "next/navigation";
 import { useState, useEffect, useRef } from "react";
 import { IoImageOutline } from "react-icons/io5";
-// import { useDispatch } from "react-redux";
-// import { addUserInfo } from "../store";
 import { storage } from "../config/firebase";
 import { ref, uploadBytes } from "firebase/storage";
 
@@ -45,7 +43,6 @@ const page = () => {
 		if (description === "") {
 			setDescriptionErr("description field required");
 		} else {
-			// dispatch(addUserInfo({ description }));
 			router.push("/thanks");
 			const imageRef = ref(storage, `images/${image.name}`);
 			uploadBytes(imageRef, image);

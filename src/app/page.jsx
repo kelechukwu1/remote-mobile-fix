@@ -3,13 +3,18 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
-import { addUserInfo } from "./store";
-import { v4 as uuidv4 } from "uuid";
+import { db } from "./config/firebase";
+import { addDoc, collection } from "firebase/firestore";
+import { setNewDocId } from "./store";
 
 export default function Home() {
+	//init next router
 	const router = useRouter();
+	//init rtk dispatch method
 	const dispatch = useDispatch();
-	const id = uuidv4();
+
+	//firestore repairers ref
+	const initialUserRef = collection(db, "user");
 	//search state
 	const [input, setInput] = useState("");
 	const [inputerr, setInputErr] = useState("");
@@ -28,14 +33,20 @@ export default function Home() {
 			clearTimeout(timeoutId);
 		};
 	}, [inputerr]);
+
 	//handle submit function
-	const handleSubmit = (e) => {
+	const handleSubmit = async (e) => {
 		e.preventDefault();
 		if (input === "") {
 			setInputErr("Field must not be empty");
 		} else {
 			router.push("question");
-			dispatch(addUserInfo({ input, id: id }));
+			//add document to firebase
+			const newDocRef = await addDoc(initialUserRef, {
+				userLocation: input,
+			});
+			//dispatch to rtk store
+			dispatch(setNewUserId(newDocRef.id));
 		}
 	};
 	return (

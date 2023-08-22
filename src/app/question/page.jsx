@@ -4,14 +4,19 @@ import { BsArrowLeft } from "react-icons/bs";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import Link from "next/link";
-import { useDispatch } from "react-redux";
-import { addUserInfo } from "../store";
+import { db } from "../config/firebase";
+import { updateDoc, doc } from "firebase/firestore";
+import { useSelector } from "react-redux";
 
 const page = () => {
 	//init nextJs router navigation
 	const router = useRouter();
-	//initialize the rtk dispatch method
-	const dispatch = useDispatch();
+
+	//get rtk value
+	const userId = useSelector((state) => state.user.value);
+	console.log(userId);
+	//firestore repairers ref
+	const initialUserRef = doc(db, "user", userId);
 	// create state for the input fields
 	const [email, setEmail] = useState("");
 	const [phone, setPhone] = useState("");
@@ -37,7 +42,7 @@ const page = () => {
 		};
 	}, [emailErr, phoneErr]);
 	//handleSubmit function
-	const handleSubmit = (e) => {
+	const handleSubmit = async (e) => {
 		e.preventDefault();
 		const emailRegEx =
 			/^([a-zA-Z0-9_\-\.]+)@([a-zA-Z0-9_\-\.]+)\.([a-zA-Z]{2,5})$/;
@@ -46,8 +51,16 @@ const page = () => {
 		} else if (phone === "") {
 			setPhoneErr("Field must not be empty");
 		} else {
-			dispatch(addUserInfo({ email, phone }));
 			router.push("/problemDescription");
+			//add data to firebase
+			await updateDoc(
+				initialUserRef,
+				{
+					email: email,
+					phone: phone,
+				},
+				{ merge: true }
+			);
 		}
 	};
 

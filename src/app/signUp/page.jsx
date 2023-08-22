@@ -132,7 +132,7 @@ const page = () => {
 		} else {
 			//redirect the page
 			checked && router.push("/dashboard");
-			//add data to firebase
+			//merge data to firebase id=== rtk id
 			await updateDoc(
 				initialRepairersRef,
 				{

@@ -14,7 +14,9 @@ import { setNewDocId } from "../store";
 // import validations from "../components/validations";
 
 const page = () => {
+	//init next router
 	const router = useRouter();
+	//init rtk dispatch method
 	const dispatch = useDispatch();
 	//firestore repairers ref
 	const initialRepairersRef = collection(db, "repairers");

@@ -32,6 +32,14 @@ export const userSlice = createSlice({
 			// state.value = updatedValue; // Update the state
 			localStorage.setItem("userInfo", JSON.stringify(state.value));
 		},
+		setNewUserId: (state, action) => {
+			//set the state to action.payload
+			state.value = action.payload;
+			console.log(state.value);
+			// Create a new array with the updated value
+			// const updatedValue = [...state.value, action.payload];
+			// state.value = updatedValue; // Update the state
+		},
 	},
 });
-export const { setNewDocId } = userSlice.actions;
+export const { setNewDocId, setNewUserId } = userSlice.actions;

@@ -7,7 +7,7 @@ import { Inter } from "next/font/google";
 import { usePathname } from "next/navigation";
 import { Provider } from "react-redux";
 import { configureStore } from "@reduxjs/toolkit";
-import { userInfoSlice } from "./store";
+import { userSlice } from "./store";
 const inter = Inter({ subsets: ["latin"] });
 
 // export const metadata = {
@@ -20,7 +20,8 @@ export default function RootLayout({ children }) {
 	//redux store reducers
 	const store = configureStore({
 		reducer: {
-			locations: userInfoSlice.reducer,
+			user: userSlice.reducer,
+			// repairers: repairerSlice.reducer,
 		},
 	});
 	return (

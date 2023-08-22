@@ -4,14 +4,18 @@ import { useEffect, useRef, useState } from "react";
 import { BsArrowLeft } from "react-icons/bs";
 import { useRouter } from "next/navigation";
 import { IoImageOutline } from "react-icons/io5";
+import { useDispatch } from "react-redux";
 import { db } from "../config/firebase";
 import { addDoc, collection } from "firebase/firestore";
 import { storage } from "../config/firebase";
 import { ref, uploadBytes } from "firebase/storage";
+import { setNewDocId } from "../store";
+
 // import validations from "../components/validations";
 
 const page = () => {
 	const router = useRouter();
+	const dispatch = useDispatch();
 	//firestore repairers ref
 	const initialRepairersRef = collection(db, "repairers");
 
@@ -63,6 +67,18 @@ const page = () => {
 
 	const handleSubmit = async (e) => {
 		e.preventDefault();
+		//add document to firebase
+		const newDocRef = await addDoc(initialRepairersRef, {
+			businessName: values.businessName,
+			businessAddress: values.businessAddress,
+			businessCity: values.businessCity,
+			businessDescription: values.businessDescription,
+		});
+		// const newDocId = newDocRef.id;
+
+		//upload selected profile picture to firebase cloud storage
+		const imageRef = await ref(storage, `images/${image.name}`);
+		uploadBytes(imageRef, image);
 		//validate name input
 		const nameRe = /^[a-zA-Z]{2,15}$/;
 		//address regular expresion
@@ -80,16 +96,11 @@ const page = () => {
 			// setError(validations(values));
 			//redirect the page
 			router.push("/signUp");
+			//dispatch to rtk store
+			dispatch(setNewDocId(newDocRef.id));
 		}
-		await addDoc(initialRepairersRef, {
-			businessName: values.businessName,
-			businessAddress: values.businessAddress,
-			businessCity: values.businessCity,
-			businessDescription: values.businessDescription,
-		});
-		const imageRef = ref(storage, `images/${image.name}`);
-		uploadBytes(imageRef, image);
 	};
+
 	return (
 		<div className="py-5 bg-gray-100 lg:bg-gray-50 md:px-36 lg:px-80">
 			<div
@@ -159,7 +170,8 @@ const page = () => {
 							<div className="w-full">
 								<textarea
 									onChange={handleChange}
-									name="businessService"
+									value={values.businessDescription}
+									name="businessDescription"
 									placeholder="Enter your text..."
 									className="w-full p-2 border border-gray-500 rounded-lg h-28 md:text-2xl text-md"
 								></textarea>

@@ -60,61 +60,42 @@ const page = () => {
 					</div>
 				</div>
 				{/* contact card display */}
+
 				<div className="font-semibold text-2xl mb-5">
 					Some repairers around your location
 				</div>
 				<div className="md:flex w-full md:justify-between">
-					<div className="bg-gray-50 rounded py-5 shadow mb-5 w-full md:w-[1/2] md:mr-5">
-						<div className="flex justify-between px-4">
-							<div className="mr-5">
-								<img
-									className="h-[100px] w-[100px] rounded-[100%]"
-									src="/./images/showcase.jpg"
-									alt="profile picture"
-								/>
-							</div>
+					{initialRepairers.map((info, index) => (
+						<div
+							key={index}
+							className="bg-gray-50 rounded py-5 shadow mb-5 w-full md:w-[1/2] md:mr-5"
+						>
+							<div className="flex justify-between px-4">
+								{imageList.map((url, index) => (
+									<div key={index} className="mr-5">
+										<img
+											className="h-[100px] w-[100px] rounded-[100%]"
+											src={url}
+											alt="profile picture"
+										/>
+									</div>
+								))}
 
-							<div>
-								<div className="font-semibold text-xl">Thomas Thompson</div>
-								<div className="text-gray-500">
-									Spec360 phone repairs, <br /> tetlow, Owerri.
+								<div>
+									<div className="font-semibold text-xl">{info.firstName}</div>
+									<div className="text-gray-500">
+										{info.businessName}, <br /> {info.businessAddress},
+										{info.businessCity}.
+									</div>
+									<div className="text-gray-500">{info.phone}</div>
 								</div>
-								<div className="text-gray-500 ">09063646331</div>
+							</div>
+							<hr className="my-3" />
+							<div className="flex justify-around px-1">
+								<div className="text-gray-500 text-sm">{info.email}</div>
 							</div>
 						</div>
-						<hr className="my-3" />
-						<div className="flex justify-around px-1">
-							<div className="text-gray-500 text-sm">
-								obiefunakelechukwu@gmail.com
-							</div>
-						</div>
-					</div>
-
-					<div className="bg-gray-50 rounded py-5 shadow mb-5 w-full md:w-[1/2] md:mr-5">
-						<div className="flex justify-between px-4">
-							<div className="mr-5">
-								<img
-									className="h-[100px] w-[100px] rounded-[100%]"
-									src="/./images/OIP.jpg"
-									alt="profile picture"
-								/>
-							</div>
-
-							<div>
-								<div className="font-semibold text-xl">Thomas Thompson</div>
-								<div className="text-gray-500">
-									Spec360 phone repairs, <br /> tetlow, Owerri.
-								</div>
-								<div className="text-gray-500">09063646331</div>
-							</div>
-						</div>
-						<hr className="my-3" />
-						<div className="flex justify-around px-1">
-							<div className="text-gray-500 text-sm">
-								obiefunakelechukwu@gmail.com
-							</div>
-						</div>
-					</div>
+					))}
 				</div>
 			</div>
 		</>
@@ -124,14 +105,7 @@ const page = () => {
 export default page;
 
 {
-	/* {initialRepairers.map((info, index) => (
-					<div key={index} className="bg-white">
-						
-						<div>{info.businessName}</div>
-						<div>{info.businessAddress}</div>
-						<div>{info.businessCity}</div>
-					</div>
-				))}
+	/*
 				{imageList.map((url, index) => (
 					<img key={index} src={url} />
 				))} */

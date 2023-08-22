@@ -5,7 +5,7 @@ import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { db } from "./config/firebase";
 import { addDoc, collection } from "firebase/firestore";
-import { setNewDocId } from "./store";
+import { setNewUserId } from "./store";
 
 export default function Home() {
 	//init next router

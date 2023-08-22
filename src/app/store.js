@@ -36,6 +36,8 @@ export const userSlice = createSlice({
 			//set the state to action.payload
 			state.value = action.payload;
 			console.log(state.value);
+			localStorage.setItem("userInfo", JSON.stringify(state.value));
+
 			// Create a new array with the updated value
 			// const updatedValue = [...state.value, action.payload];
 			// state.value = updatedValue; // Update the state

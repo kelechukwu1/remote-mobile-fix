@@ -3,14 +3,19 @@
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { db } from "../config/firebase";
-import { addDoc, collection } from "firebase/firestore";
+import { updateDoc, doc } from "firebase/firestore";
 import { auth } from "../config/firebase";
+import { useSelector } from "react-redux";
 import { createUserWithEmailAndPassword } from "firebase/auth";
 
 const page = () => {
+	//init next router
 	const router = useRouter();
+	//get rtk value
+	const userId = useSelector((state) => state.user.value);
+
 	//firestore repairers ref
-	const initialRepairersRef = collection(db, "repairers");
+	const initialRepairersRef = doc(db, "repairers", userId);
 
 	//FUNCTIONS BELOW TAKES CARE OF INPUT VALIDATIONS AND SUBMIT EVENTS
 	//get form values
@@ -23,8 +28,9 @@ const page = () => {
 		phone: "",
 		confirmPhone: "",
 		password: "",
-		isChecked: false,
 	});
+	//seperate checkbox state
+	const [checked, setChecked] = useState(false);
 
 	//handleChange function
 	const handleChange = (e) => {
@@ -32,6 +38,7 @@ const page = () => {
 	};
 
 	//error state
+	// let error = {};
 	const [emailErr, setEmailErr] = useState("");
 	const [confirmEmailErr, setConfirmEmailErr] = useState("");
 	const [firstNameErr, setFirstNameErr] = useState("");
@@ -87,6 +94,7 @@ const page = () => {
 
 	const handleSubmit = async (e) => {
 		e.preventDefault();
+
 		//email regex
 		const emailRegEx =
 			/^([a-zA-Z0-9_\-\.]+)@([a-zA-Z0-9_\-\.]+)\.([a-zA-Z]{2,5})$/;
@@ -123,33 +131,41 @@ const page = () => {
 			setIsCheckedErr("You have not accepted our terms of service");
 		} else {
 			//redirect the page
-			router.push("/dashboard");
-		}
-		//add data to firebase
-		await addDoc(initialRepairersRef, {
-			email: values.email,
-			firstName: values.firstName,
-			lastName: values.lastName,
-			userName: values.userName,
-			phone: values.phone,
-			password: values.password,
-		});
-		//implement firebase auth sign up
-		try {
-			await createUserWithEmailAndPassword(auth, values.email, values.password);
-			console.log(email, "has been created");
-		} catch (err) {
-			console.error(err.message);
+			checked && router.push("/dashboard");
+			//add data to firebase
+			await updateDoc(
+				initialRepairersRef,
+				{
+					email: values.email,
+					firstName: values.firstName,
+					lastName: values.lastName,
+					userName: values.userName,
+					phone: values.phone,
+					password: values.password,
+				},
+				{ merge: true }
+			);
+			//implement firebase auth sign up
+			try {
+				await createUserWithEmailAndPassword(
+					auth,
+					values.email,
+					values.password
+				);
+				console.log(values.email, "has been created");
+			} catch (err) {
+				console.error(err.message);
+			}
 		}
 	};
 	return (
 		<>
-			<div className="bg-gray-100 lg:bg-gray-50 py-5 md:px-36 lg:px-80">
-				<div className="bg-white rounded-2xl shadow-lg mx-5 px-5 items-center py-10">
+			<div className="py-5 bg-gray-100 lg:bg-gray-50 md:px-36 lg:px-80">
+				<div className="items-center px-5 py-10 mx-5 bg-white shadow-lg rounded-2xl">
 					<div className="text-3xl">The easiest way to find new customers</div>
 					<form onSubmit={handleSubmit}>
-						<div className="text-center my-5 text-xl">Setup your account</div>
-						<div className=" mb-5">
+						<div className="my-5 text-xl text-center">Setup your account</div>
+						<div className="mb-5 ">
 							<label className="text-md">Email address</label>
 							<input
 								onChange={handleChange}
@@ -160,10 +176,10 @@ const page = () => {
 								placeholder="Enter your email address"
 							/>
 							{emailErr && (
-								<div className="text-red-500 text-sm">{emailErr}</div>
+								<div className="text-sm text-red-500">{emailErr}</div>
 							)}
 						</div>
-						<div className=" mb-5">
+						<div className="mb-5 ">
 							<label className="text-md">Confirm email address</label>
 							<input
 								onChange={handleChange}
@@ -174,11 +190,11 @@ const page = () => {
 								placeholder="Enter your email address"
 							/>
 							{confirmEmailErr && (
-								<div className="text-red-500 text-sm">{confirmEmailErr}</div>
+								<div className="text-sm text-red-500">{confirmEmailErr}</div>
 							)}
 						</div>
 
-						<div className=" mb-5">
+						<div className="mb-5 ">
 							<label className="text-md">Name</label>
 							<div className="flex">
 								<div className="mr-1">
@@ -191,7 +207,7 @@ const page = () => {
 										placeholder="Firstname"
 									/>
 									{firstNameErr && (
-										<div className="text-red-500 text-sm">{firstNameErr}</div>
+										<div className="text-sm text-red-500">{firstNameErr}</div>
 									)}
 								</div>
 								<div className="ml-1">
@@ -204,13 +220,13 @@ const page = () => {
 										placeholder="Lastname"
 									/>
 									{lastNameErr && (
-										<div className="text-red-500 text-sm">{lastNameErr}</div>
+										<div className="text-sm text-red-500">{lastNameErr}</div>
 									)}
 								</div>
 							</div>
 						</div>
 
-						<div className=" mb-5">
+						<div className="mb-5 ">
 							<label className="text-md">Username</label>
 							<input
 								onChange={handleChange}
@@ -221,11 +237,11 @@ const page = () => {
 								placeholder=""
 							/>
 							{userNameErr && (
-								<div className="text-red-500 text-sm">{userNameErr}</div>
+								<div className="text-sm text-red-500">{userNameErr}</div>
 							)}
 						</div>
 
-						<div className=" mb-5">
+						<div className="mb-5 ">
 							<label className="text-md">Phone</label>
 							<div className="flex">
 								<div className="mr-1 w-[1/2]">
@@ -238,7 +254,7 @@ const page = () => {
 										placeholder="phone"
 									/>
 									{phoneErr && (
-										<div className="text-red-500 text-sm">{phoneErr}</div>
+										<div className="text-sm text-red-500">{phoneErr}</div>
 									)}
 								</div>
 								<div className="ml-1 w-[1/2]">
@@ -251,14 +267,14 @@ const page = () => {
 										placeholder="confirm phone"
 									/>
 									{confirmPhoneErr && (
-										<div className="text-red-500 text-sm">
+										<div className="text-sm text-red-500">
 											{confirmPhoneErr}
 										</div>
 									)}
 								</div>
 							</div>
 						</div>
-						<div className=" mb-5">
+						<div className="mb-5 ">
 							<label className="text-md">Password</label>
 							<input
 								onChange={handleChange}
@@ -269,17 +285,18 @@ const page = () => {
 								placeholder="Password"
 							/>
 							{PasswordErr && (
-								<div className="text-red-500 text-sm">{PasswordErr}</div>
+								<div className="text-sm text-red-500">{PasswordErr}</div>
 							)}
 						</div>
 
-						<div className=" flex items-center">
+						<div className="flex items-center ">
 							<input
-								onChange={() => {
-									!values.isChecked;
+								onChange={(e) => {
+									setChecked(e.target.checked);
 								}}
 								type="checkbox"
-								className="mr-3 cursor-pointer w-6 h-6 border-2 rounded-3xl"
+								name="checkbox"
+								className="w-6 h-6 mr-3 border-2 cursor-pointer rounded-3xl"
 							/>
 							<label className="text-md">
 								I agree to the{" "}
@@ -287,11 +304,11 @@ const page = () => {
 							</label>
 						</div>
 						{isCheckedErr && (
-							<div className="text-red-500 text-sm">{isCheckedErr}</div>
+							<div className="text-sm text-red-500">{isCheckedErr}</div>
 						)}
 
 						<button
-							className="mt-5 w-full p-3 text-md bg-slate-900 hover:bg-slate-950 transition duration-500 text-white rounded-lg"
+							className="w-full p-3 mt-5 text-white transition duration-500 rounded-lg text-md bg-slate-900 hover:bg-slate-950"
 							type="submit"
 						>
 							Register

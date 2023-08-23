@@ -15,6 +15,7 @@ const page = () => {
 	//get rtk value
 	const userId = useSelector((state) => state.user.value);
 	console.log(userId);
+
 	//firestore repairers ref
 	const initialUserRef = doc(db, "user", userId);
 	// create state for the input fields

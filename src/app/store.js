@@ -11,7 +11,8 @@ if (isBrowser) {
 	parsedLocalStorageUser = localStorageUser ? JSON.parse(localStorageUser) : [];
 }
 const initialState = {
-	value: parsedLocalStorageUser,
+	repairerId: parsedLocalStorageUser, // Initial state for repairerId
+	userId: parsedLocalStorageUser, // Initial state for userId
 };
 
 export const userSlice = createSlice({
@@ -20,18 +21,16 @@ export const userSlice = createSlice({
 	reducers: {
 		setNewRepairerId: (state, action) => {
 			//set the state to action.payload
-			state.value = action.payload;
-			console.log(state.value);
-			// Create a new array with the updated value
-			// const updatedValue = [...state.value, action.payload];
-			// state.value = updatedValue; // Update the state
-			localStorage.setItem("userInfo", JSON.stringify(state.value));
+			state.repairerId = action.payload;
+			console.log(state.repairerId);
+
+			localStorage.setItem("userInfo", JSON.stringify(action.payload));
 		},
 		setNewUserId: (state, action) => {
 			//set the state to action.payload
-			state.value = action.payload;
-			console.log(state.value);
-			localStorage.setItem("userInfo", JSON.stringify(state.value));
+			state.userId = action.payload;
+			console.log(state.userId);
+			localStorage.setItem("userInfo", JSON.stringify(action.payload));
 		},
 	},
 });

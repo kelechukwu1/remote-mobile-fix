@@ -69,13 +69,6 @@ const page = () => {
 
 	const handleSubmit = async (e) => {
 		e.preventDefault();
-		//add document to firebase
-		const newDocRef = await addDoc(initialRepairersRef, {
-			businessName: values.businessName,
-			businessAddress: values.businessAddress,
-			businessCity: values.businessCity,
-			businessDescription: values.businessDescription,
-		});
 		// const newDocId = newDocRef.id;
 
 		//upload selected profile picture to firebase cloud storage
@@ -95,11 +88,17 @@ const page = () => {
 		} else if (!cityRe.test(values.businessCity)) {
 			setCError("Enter a valid city");
 		} else {
-			// setError(validations(values));
-			//redirect the page
-			router.push("/signUp");
+			//add document to firebase
+			const newDocRef = await addDoc(initialRepairersRef, {
+				businessName: values.businessName,
+				businessAddress: values.businessAddress,
+				businessCity: values.businessCity,
+				businessDescription: values.businessDescription,
+			});
 			//dispatch to rtk store
 			dispatch(setNewRepairerId(newDocRef.id));
+			//redirect the page
+			router.push("/signUp");
 		}
 	};
 

@@ -5,17 +5,16 @@ import { useRouter } from "next/navigation";
 import { db } from "../config/firebase";
 import { updateDoc, doc } from "firebase/firestore";
 import { auth } from "../config/firebase";
-import { useSelector } from "react-redux";
 import { createUserWithEmailAndPassword } from "firebase/auth";
 
 const page = () => {
 	//init next router
 	const router = useRouter();
-	// //get rtk value
-	// const userId = useSelector((state) => state.user.value);
-
-	// //firestore repairers ref
-	// const initialRepairersRef = doc(db, "repairers", userId);
+	//get LS value
+	let id;
+	if (typeof window !== "undefined") {
+		id = JSON.parse(localStorage.getItem("userInfo"));
+	}
 
 	//FUNCTIONS BELOW TAKES CARE OF INPUT VALIDATIONS AND SUBMIT EVENTS
 	//get form values
@@ -130,32 +129,36 @@ const page = () => {
 		} else if (values.isChecked === false) {
 			setIsCheckedErr("You have not accepted our terms of service");
 		} else {
-			// //redirect the page
-			// checked && router.push("/dashboard");
-			// //merge data to firebase id=== rtk id
-			// await updateDoc(
-			// 	initialRepairersRef,
-			// 	{
-			// 		email: values.email,
-			// 		firstName: values.firstName,
-			// 		lastName: values.lastName,
-			// 		userName: values.userName,
-			// 		phone: values.phone,
-			// 		password: values.password,
-			// 	},
-			// 	{ merge: true }
-			// );
-			// //implement firebase auth sign up
-			// try {
-			// 	await createUserWithEmailAndPassword(
-			// 		auth,
-			// 		values.email,
-			// 		values.password
-			// 	);
-			// } catch (err) {
-			// 	console.error(err.message);
-			// }
-			console.log("done");
+			//redirect the page
+			checked && router.push("/dashboard");
+			//merge data to firebase id=== rtk id
+			try {
+				await updateDoc(
+					doc(db, "repairers", id),
+					{
+						email: values.email,
+						firstName: values.firstName,
+						lastName: values.lastName,
+						userName: values.userName,
+						phone: values.phone,
+						password: values.password,
+					},
+					{ merge: true }
+				);
+			} catch (err) {
+				console.log(err.message);
+			}
+
+			//implement firebase auth sign up
+			try {
+				await createUserWithEmailAndPassword(
+					auth,
+					values.email,
+					values.password
+				);
+			} catch (err) {
+				console.error(err.message);
+			}
 		}
 	};
 	return (

@@ -1,4 +1,5 @@
 "use client";
+
 import { useState, useEffect } from "react";
 import { storage, db } from "../config/firebase";
 import { getDocs, collection } from "firebase/firestore";
@@ -71,7 +72,7 @@ const page = () => {
 							className="bg-gray-50 rounded py-5 shadow mb-5 w-full md:w-[1/2] md:mr-5"
 						>
 							<div className="flex justify-between px-4">
-								{imageList.map((url, index) => (
+								{/* {imageList.map((url, index) => (
 									<div key={index} className="mr-5">
 										<img
 											className="h-[100px] w-[100px] rounded-[100%]"
@@ -79,7 +80,7 @@ const page = () => {
 											alt="profile picture"
 										/>
 									</div>
-								))}
+								))} */}
 
 								<div>
 									<div className="font-semibold text-xl">{info.firstName}</div>

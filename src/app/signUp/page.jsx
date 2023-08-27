@@ -129,8 +129,6 @@ const page = () => {
 		} else if (values.isChecked === false) {
 			setIsCheckedErr("You have not accepted our terms of service");
 		} else {
-			//redirect the page
-			checked && router.push("/dashboard");
 			//merge data to firebase id=== rtk id
 			try {
 				await updateDoc(
@@ -145,6 +143,8 @@ const page = () => {
 					},
 					{ merge: true }
 				);
+				//redirect the page
+				checked && router.push("/dashboard");
 			} catch (err) {
 				console.log(err.message);
 			}

@@ -58,13 +58,13 @@ const page = () => {
 					},
 					{ merge: true }
 				);
+				//redirect page
+				router.push("/thanks");
 			} catch (err) {
 				console.log(err.message);
 			}
 			const imageRef = await ref(storage, `images/${image.name}`);
 			uploadBytes(imageRef, image);
-			//redirect page
-			router.push("/thanks");
 		}
 	};
 	return (

@@ -95,13 +95,13 @@ const page = () => {
 					businessCity: values.businessCity,
 					businessDescription: values.businessDescription,
 				});
+				//dispatch to rtk store
+				dispatch(setNewRepairerId(newDocRef.id));
+				//redirect the page
+				router.push("/signUp");
 			} catch (err) {
 				console.log(err.message);
 			}
-			//dispatch to rtk store
-			dispatch(setNewRepairerId(newDocRef.id));
-			//redirect the page
-			router.push("/signUp");
 		}
 	};
 

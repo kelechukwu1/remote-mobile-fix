@@ -58,12 +58,11 @@ const page = () => {
 					},
 					{ merge: true }
 				);
+				//redirect page
+				router.push("/problemDescription");
 			} catch (err) {
 				console.log(err.message);
 			}
-
-			//redirect page
-			router.push("/problemDescription");
 		}
 	};
 

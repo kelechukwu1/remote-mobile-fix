@@ -6,26 +6,22 @@ import { useEffect, useState } from "react";
 import Link from "next/link";
 import { db } from "../config/firebase";
 import { updateDoc, doc } from "firebase/firestore";
-import { useSelector } from "react-redux";
-
 const page = () => {
 	//init nextJs router navigation
 	const router = useRouter();
 
-	// //get rtk value
-	// const userId = useSelector((state) => state.user.value);
-	// console.log(userId);
+	//get LS value
+	let id;
+	if (typeof window !== "undefined") {
+		id = JSON.parse(localStorage.getItem("userInfo"));
+	}
 
-	// //firestore repairers ref
-	// const initialUserRef = doc(db, "user", userId);
 	// create state for the input fields
 	const [email, setEmail] = useState("");
 	const [phone, setPhone] = useState("");
 	// create state for the input field errors
 	const [emailErr, setEmailErr] = useState("");
 	const [phoneErr, setPhoneErr] = useState("");
-	// const handleRef = useRef();
-	// console.log(handleRef);
 
 	//clear input error function
 	useEffect(() => {
@@ -52,17 +48,22 @@ const page = () => {
 		} else if (phone === "") {
 			setPhoneErr("Field must not be empty");
 		} else {
-			// router.push("/problemDescription");
-			// //add data to firebase
-			// await updateDoc(
-			// 	initialUserRef,
-			// 	{
-			// 		email: email,
-			// 		phone: phone,
-			// 	},
-			// 	{ merge: true }
-			// );
-			console.log("done");
+			try {
+				//add data to firebase
+				await updateDoc(
+					doc(db, "user", id),
+					{
+						email: email,
+						phone: phone,
+					},
+					{ merge: true }
+				);
+			} catch (err) {
+				console.log(err.message);
+			}
+
+			//redirect page
+			router.push("/problemDescription");
 		}
 	};
 

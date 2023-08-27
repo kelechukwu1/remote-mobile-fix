@@ -69,7 +69,6 @@ const page = () => {
 
 	const handleSubmit = async (e) => {
 		e.preventDefault();
-		// const newDocId = newDocRef.id;
 
 		//upload selected profile picture to firebase cloud storage
 		const imageRef = await ref(storage, `images/${image.name}`);
@@ -89,12 +88,16 @@ const page = () => {
 			setCError("Enter a valid city");
 		} else {
 			//add document to firebase
-			const newDocRef = await addDoc(initialRepairersRef, {
-				businessName: values.businessName,
-				businessAddress: values.businessAddress,
-				businessCity: values.businessCity,
-				businessDescription: values.businessDescription,
-			});
+			try {
+				const newDocRef = await addDoc(initialRepairersRef, {
+					businessName: values.businessName,
+					businessAddress: values.businessAddress,
+					businessCity: values.businessCity,
+					businessDescription: values.businessDescription,
+				});
+			} catch (err) {
+				console.log(err.message);
+			}
 			//dispatch to rtk store
 			dispatch(setNewRepairerId(newDocRef.id));
 			//redirect the page

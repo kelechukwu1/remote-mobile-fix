@@ -4,12 +4,18 @@ import { useState, useEffect, useRef } from "react";
 import { IoImageOutline } from "react-icons/io5";
 import { storage } from "../config/firebase";
 import { ref, uploadBytes } from "firebase/storage";
+import { updateDoc, doc } from "firebase/firestore";
+import { db } from "../config/firebase";
 
 const page = () => {
 	//init nextJs navigation
 	const router = useRouter();
-	//init rtk dispatch method
-	// const dispatch = useDispatch();
+
+	//get LS value
+	let id;
+	if (typeof window !== "undefined") {
+		id = JSON.parse(localStorage.getItem("userInfo"));
+	}
 
 	//input ref for file upload
 	const inputRef = useRef(null);
@@ -38,14 +44,27 @@ const page = () => {
 		};
 	}, [descriptionErr]);
 	//handleSubmit function
-	const handleSubmit = (e) => {
+	const handleSubmit = async (e) => {
 		e.preventDefault();
 		if (description === "") {
 			setDescriptionErr("description field required");
 		} else {
-			router.push("/thanks");
-			const imageRef = ref(storage, `images/${image.name}`);
+			try {
+				//add data to firebase
+				await updateDoc(
+					doc(db, "user", id),
+					{
+						description: description,
+					},
+					{ merge: true }
+				);
+			} catch (err) {
+				console.log(err.message);
+			}
+			const imageRef = await ref(storage, `images/${image.name}`);
 			uploadBytes(imageRef, image);
+			//redirect page
+			router.push("/thanks");
 		}
 	};
 	return (

@@ -40,13 +40,18 @@ export default function Home() {
 		if (input === "") {
 			setInputErr("Field must not be empty");
 		} else {
-			router.push("question");
 			//add document to firebase
-			const newDocRef = await addDoc(initialUserRef, {
-				userLocation: input,
-			});
-			//dispatch to rtk store
-			dispatch(setNewUserId(newDocRef.id));
+			try {
+				const newDocRef = await addDoc(initialUserRef, {
+					userLocation: input,
+				});
+				//dispatch to rtk store
+				dispatch(setNewUserId(newDocRef.id));
+			} catch (err) {
+				console.log(err.message);
+			}
+			//redirect page
+			router.push("question");
 		}
 	};
 	return (

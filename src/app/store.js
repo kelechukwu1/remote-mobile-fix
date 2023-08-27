@@ -23,7 +23,6 @@ export const userSlice = createSlice({
 			//set the state to action.payload
 			state.repairerId = action.payload;
 			console.log(state.repairerId);
-
 			localStorage.setItem("userInfo", JSON.stringify(action.payload));
 		},
 		setNewUserId: (state, action) => {

@@ -11,9 +11,9 @@ const page = () => {
 	//get initial form values from firestore collection
 	const initialRepairersRef = collection(db, "repairers");
 	//firebase storage image ref
-	const imageRef = ref(storage, "images/");
+	// const imageRef = ref(storage, "images/");
 	//firebase image list state
-	const [imageList, setImageList] = useState([]);
+	// const [imageList, setImageList] = useState([]);
 
 	useEffect(() => {
 		const getInitialRepairers = async () => {
@@ -26,13 +26,13 @@ const page = () => {
 				}));
 				//set firestore data
 				setInitialRepairers(filteredData);
-				listAll(imageRef).then((res) => {
-					res.items.forEach((item) => {
-						getDownloadURL(item).then((url) => {
-							setImageList((prev) => [...prev, url]);
-						});
-					});
-				});
+				// listAll(imageRef).then((res) => {
+				// 	res.items.forEach((item) => {
+				// 		getDownloadURL(item).then((url) => {
+				// 			setImageList((prev) => [...prev, url]);
+				// 		});
+				// 	});
+				// });
 			} catch (err) {
 				console.error(err.message);
 			}
@@ -65,35 +65,27 @@ const page = () => {
 				<div className="font-semibold text-2xl mb-5">
 					Some repairers around your location
 				</div>
-				<div className="md:flex w-full md:justify-between">
+				<div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 xl:grid-cols-3 gap-4">
 					{initialRepairers.map((info, index) => (
-						<div
-							key={index}
-							className="bg-gray-50 rounded py-5 shadow mb-5 w-full md:w-[1/2] md:mr-5"
-						>
-							<div className="flex justify-between px-4">
-								{/* {imageList.map((url, index) => (
-									<div key={index} className="mr-5">
-										<img
-											className="h-[100px] w-[100px] rounded-[100%]"
-											src={url}
-											alt="profile picture"
-										/>
-									</div>
-								))} */}
-
-								<div>
-									<div className="font-semibold text-xl">{info.firstName}</div>
-									<div className="text-gray-500">
-										{info.businessName}, <br /> {info.businessAddress},
-										{info.businessCity}.
-									</div>
-									<div className="text-gray-500">{info.phone}</div>
+						<div key={index} className="bg-gray-50 rounded py-5 shadow px-4">
+							<div className="flex flex-col items-center">
+								<div className="mb-3">
+									<img
+										className="h-[100px] w-[100px] rounded-full"
+										src={info.profileImage}
+										alt="Profile picture"
+									/>
 								</div>
+								<div className="font-semibold text-xl">{info.firstName}</div>
+								<div className="text-gray-500">
+									{info.businessName}, <br /> {info.businessAddress},{" "}
+									{info.businessCity}.
+								</div>
+								<div className="text-gray-500 mt-2">{info.phone}</div>
 							</div>
 							<hr className="my-3" />
-							<div className="flex justify-around px-1">
-								<div className="text-gray-500 text-sm">{info.email}</div>
+							<div className="text-center text-gray-500 text-sm">
+								{info.email}
 							</div>
 						</div>
 					))}
@@ -104,10 +96,3 @@ const page = () => {
 };
 
 export default page;
-
-{
-	/*
-				{imageList.map((url, index) => (
-					<img key={index} src={url} />
-				))} */
-}

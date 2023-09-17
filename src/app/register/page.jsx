@@ -8,9 +8,9 @@ import { useDispatch } from "react-redux";
 import { db } from "../config/firebase";
 import { addDoc, collection } from "firebase/firestore";
 import { storage } from "../config/firebase";
-import { ref, uploadBytes } from "firebase/storage";
+import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
 import { setNewRepairerId } from "../store";
-
+import { v4 } from "uuid";
 // import validations from "../components/validations";
 
 const page = () => {
@@ -25,6 +25,7 @@ const page = () => {
 	//input ref for file upload
 	const inputRef = useRef(null);
 	const [image, setImage] = useState("");
+	const [url, setUrl] = useState("");
 
 	const handleImageChange = (e) => {
 		const file = e.target.files[0];
@@ -70,38 +71,46 @@ const page = () => {
 	const handleSubmit = async (e) => {
 		e.preventDefault();
 
-		//upload selected profile picture to firebase cloud storage
-		const imageRef = await ref(storage, `images/${image.name}`);
-		uploadBytes(imageRef, image);
-		//validate name input
-		const nameRe = /^[a-zA-Z]{2,15}$/;
-		//address regular expresion
-		const addressRe = /^[a-zA-Z]{2,30}\w$/;
-		//validate city input
-		const cityRe = /^[a-zA-Z]{2,10}\w$/;
+		// Upload selected profile picture to Firebase Cloud Storage
+		const imageRef = ref(storage, `images/${image.name + v4()}`);
 
-		if (!nameRe.test(values.businessName)) {
-			setBError("Name must be between 2 to 15 characters long");
-		} else if (!addressRe.test(values.businessAddress)) {
-			setAError("Enter a valid address");
-		} else if (!cityRe.test(values.businessCity)) {
-			setCError("Enter a valid city");
-		} else {
-			//add document to firebase
-			try {
+		try {
+			// Upload the image to Firebase Storage
+			await uploadBytes(imageRef, image);
+
+			// Get the download URL after the upload is complete
+			const url = await getDownloadURL(imageRef);
+			setUrl(url);
+
+			// Validate name input
+			const nameRe = /^[a-zA-Z]{2,15}$/;
+			// Address regular expression
+			const addressRe = /^[a-zA-Z]{2,30}\w$/;
+			// Validate city input
+			const cityRe = /^[a-zA-Z]{2,10}\w$/;
+
+			if (!nameRe.test(values.businessName)) {
+				setBError("Name must be between 2 to 15 characters long");
+			} else if (!addressRe.test(values.businessAddress)) {
+				setAError("Enter a valid address");
+			} else if (!cityRe.test(values.businessCity)) {
+				setCError("Enter a valid city");
+			} else {
+				// Add document to Firebase
 				const newDocRef = await addDoc(initialRepairersRef, {
 					businessName: values.businessName,
 					businessAddress: values.businessAddress,
 					businessCity: values.businessCity,
 					businessDescription: values.businessDescription,
+					profileImage: url,
 				});
-				//dispatch to rtk store
+				// Dispatch to rtk store
 				dispatch(setNewRepairerId(newDocRef.id));
-				//redirect the page
+				// Redirect the page
 				router.push("/signUp");
-			} catch (err) {
-				console.log(err.message);
 			}
+		} catch (err) {
+			console.log(err.message);
 		}
 	};
 

@@ -18,6 +18,8 @@ export default function Home() {
 	//search state
 	const [input, setInput] = useState("");
 	const [inputerr, setInputErr] = useState("");
+	//disabled button state
+	const [isDisabled, setIsDisabled] = useState(false);
 
 	//clear input error function
 	useEffect(() => {
@@ -40,6 +42,8 @@ export default function Home() {
 		if (input === "") {
 			setInputErr("Field must not be empty");
 		} else {
+			//disable the button
+			setIsDisabled(true);
 			//add document to firebase
 			try {
 				const newDocRef = await addDoc(initialUserRef, {
@@ -76,7 +80,7 @@ export default function Home() {
 									<input
 										onChange={(e) => setInput(e.target.value)}
 										type="text"
-										className="w-full p-3 px-4 text-xl bg-blue-100 rounded-sm"
+										className="w-full p-3 px-4 text-xl bg-blue-100 rounded-sm outline-none"
 										placeholder="Enter your area"
 									/>
 									{inputerr && (
@@ -84,8 +88,13 @@ export default function Home() {
 									)}
 								</div>
 								<div className="sm:w-full md:w-48">
-									<button className="w-full py-3 text-xl text-center duration-300 ease-in-out bg-blue-600 rounded-sm cursor-pointer text-blue-50 hover:bg-blue-800">
-										Go
+									<button
+										className={`w-full py-3 text-xl text-center duration-300 ease-in-out bg-blue-600 rounded-sm cursor-pointer text-blue-50 hover:bg-blue-800${
+											isDisabled ? "cursor-not-allowed opacity-50" : ""
+										}`}
+										disabled={isDisabled}
+									>
+										{isDisabled ? "Processing" : "Go"}
 									</button>
 								</div>
 							</div>

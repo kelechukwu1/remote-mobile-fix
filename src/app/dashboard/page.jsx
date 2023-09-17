@@ -3,7 +3,9 @@ import Layout from "../components/Layout";
 const page = () => {
 	return (
 		<Layout>
-			<div>this is ur dashboard home</div>
+			<div>
+				This is how your profile will look like in your customers screen
+			</div>
 		</Layout>
 	);
 };

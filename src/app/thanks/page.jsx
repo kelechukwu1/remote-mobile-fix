@@ -1,20 +1,17 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { storage, db } from "../config/firebase";
+import { db } from "../config/firebase";
 import { getDocs, collection } from "firebase/firestore";
-import { ref, listAll, getDownloadURL } from "firebase/storage";
 
 const page = () => {
+	//CREATE ALL STATES BELOW
 	//set state for firestore
 	const [initialRepairers, setInitialRepairers] = useState([]);
 	//get initial form values from firestore collection
 	const initialRepairersRef = collection(db, "repairers");
-	//firebase storage image ref
-	// const imageRef = ref(storage, "images/");
-	//firebase image list state
-	// const [imageList, setImageList] = useState([]);
 
+	//this hook gets all the repairers in the repairer's collection and stores them in a state
 	useEffect(() => {
 		const getInitialRepairers = async () => {
 			//read firestore data
@@ -24,15 +21,8 @@ const page = () => {
 					...doc.data(),
 					id: doc.id,
 				}));
-				//set firestore data
+				//set firestore data to a state
 				setInitialRepairers(filteredData);
-				// listAll(imageRef).then((res) => {
-				// 	res.items.forEach((item) => {
-				// 		getDownloadURL(item).then((url) => {
-				// 			setImageList((prev) => [...prev, url]);
-				// 		});
-				// 	});
-				// });
 			} catch (err) {
 				console.error(err.message);
 			}
@@ -57,7 +47,7 @@ const page = () => {
 					</div>
 					<div className="my-10">
 						Kindly let us know immediately you hire someone so that
-						professionals cans top contacting you.
+						professionals can stop contacting you.
 					</div>
 				</div>
 				{/* contact card display */}

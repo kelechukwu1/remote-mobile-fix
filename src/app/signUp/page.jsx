@@ -10,14 +10,9 @@ import { createUserWithEmailAndPassword } from "firebase/auth";
 const page = () => {
 	//init next router
 	const router = useRouter();
-	//get LS value
-	let id;
-	if (typeof window !== "undefined") {
-		id = JSON.parse(localStorage.getItem("userInfo"));
-	}
 
-	//FUNCTIONS BELOW TAKES CARE OF INPUT VALIDATIONS AND SUBMIT EVENTS
-	//get form values
+	//CREATE ALL STATES BELOW
+	//state for the form values
 	const [values, setValues] = useState({
 		email: "",
 		confirmEmail: "",
@@ -28,16 +23,8 @@ const page = () => {
 		confirmPhone: "",
 		password: "",
 	});
-	//seperate checkbox state
-	const [checked, setChecked] = useState(false);
 
-	//handleChange function
-	const handleChange = (e) => {
-		setValues({ ...values, [e.target.name]: e.target.value });
-	};
-
-	//error state
-	// let error = {};
+	//error state for input fields
 	const [emailErr, setEmailErr] = useState("");
 	const [confirmEmailErr, setConfirmEmailErr] = useState("");
 	const [firstNameErr, setFirstNameErr] = useState("");
@@ -47,6 +34,22 @@ const page = () => {
 	const [confirmPhoneErr, setConfirmPhoneErr] = useState("");
 	const [PasswordErr, setPasswordErr] = useState("");
 	const [isCheckedErr, setIsCheckedErr] = useState("");
+
+	//error state for login/signup/register
+	const [signupErr, setSignupErr] = useState("");
+	//seperate checkbox state
+	const [checked, setChecked] = useState(false);
+
+	//get LS value i.e the ID for manipulating firestore collection
+	let id;
+	if (typeof window !== "undefined") {
+		id = JSON.parse(localStorage.getItem("userInfo"));
+	}
+
+	//handleChange function
+	const handleChange = (e) => {
+		setValues({ ...values, [e.target.name]: e.target.value });
+	};
 
 	//clear error function
 	useEffect(() => {
@@ -61,7 +64,8 @@ const page = () => {
 			phoneErr ||
 			confirmPhoneErr ||
 			PasswordErr ||
-			isCheckedErr
+			isCheckedErr ||
+			signupErr
 		) {
 			timeoutId = setTimeout(() => {
 				setEmailErr("");
@@ -73,6 +77,7 @@ const page = () => {
 				setConfirmPhoneErr("");
 				setPasswordErr("");
 				setIsCheckedErr("");
+				setSignupErr("");
 			}, 3000);
 		}
 
@@ -89,48 +94,49 @@ const page = () => {
 		confirmPhoneErr,
 		PasswordErr,
 		isCheckedErr,
+		signupErr,
 	]);
 
+	//FUNCTIONS BELOW TAKES CARE OF INPUT VALIDATIONS AND SUBMIT EVENTS
 	const handleSubmit = async (e) => {
 		e.preventDefault();
+		try {
+			//email regex
+			const emailRegEx =
+				/^([a-zA-Z0-9_\-\.]+)@([a-zA-Z0-9_\-\.]+)\.([a-zA-Z]{2,5})$/;
+			// //name input regEx
+			// const nameRe = /^[a-zA-Z]{2,15}$/;
+			// //address input regEx
+			// const addressRe = /^[a-zA-Z]{2,30}\w$/;
+			// //city input regEx
+			// const cityRe = /^[a-zA-Z]{2,10}\w$/;
 
-		//email regex
-		const emailRegEx =
-			/^([a-zA-Z0-9_\-\.]+)@([a-zA-Z0-9_\-\.]+)\.([a-zA-Z]{2,5})$/;
-		// //name input regEx
-		// const nameRe = /^[a-zA-Z]{2,15}$/;
-		// //address input regEx
-		// const addressRe = /^[a-zA-Z]{2,30}\w$/;
-		// //city input regEx
-		// const cityRe = /^[a-zA-Z]{2,10}\w$/;
-
-		if (!emailRegEx.test(values.email)) {
-			setEmailErr("Input a valid email");
-		} else if (values.email != values.confirmEmail) {
-			setConfirmEmailErr("Email must match");
-		} else if (values.firstName === "") {
-			setFirstNameErr("Invalid field");
-		} else if (values.lastName === "") {
-			setLastNameErr("Invalid field");
-		} else if (values.userName === "") {
-			setUserNameErr("Username must not be empty");
-		} else if (values.userName.length < 5) {
-			setUserNameErr("Username must not be less than 5 char");
-		} else if (values.phone === "") {
-			setPhoneErr("Invalid field");
-		} else if (values.confirmPhone === "") {
-			setConfirmPhoneErr("Invalid field");
-		} else if (values.confirmPhone != values.phone) {
-			setConfirmPhoneErr("Phone must match");
-		} else if (values.password === "") {
-			setPasswordErr("Password must not be empty");
-		} else if (values.password < 6) {
-			setPasswordErr("Password must be up to 6 characters");
-		} else if (values.isChecked === false) {
-			setIsCheckedErr("You have not accepted our terms of service");
-		} else {
-			//merge data to firebase id=== rtk id
-			try {
+			if (!emailRegEx.test(values.email)) {
+				setEmailErr("Input a valid email");
+			} else if (values.email != values.confirmEmail) {
+				setConfirmEmailErr("Email must match");
+			} else if (values.firstName === "") {
+				setFirstNameErr("Invalid field");
+			} else if (values.lastName === "") {
+				setLastNameErr("Invalid field");
+			} else if (values.userName === "") {
+				setUserNameErr("Username must not be empty");
+			} else if (values.userName.length < 5) {
+				setUserNameErr("Username must not be less than 5 char");
+			} else if (values.phone === "") {
+				setPhoneErr("Invalid field");
+			} else if (values.confirmPhone === "") {
+				setConfirmPhoneErr("Invalid field");
+			} else if (values.confirmPhone != values.phone) {
+				setConfirmPhoneErr("Phone must match");
+			} else if (values.password === "") {
+				setPasswordErr("Password must not be empty");
+			} else if (values.password < 6) {
+				setPasswordErr("Password must be up to 6 characters");
+			} else if (values.isChecked === false) {
+				setIsCheckedErr("You have not accepted our terms of service");
+			} else {
+				//merge data to firebase id === rtk id
 				await updateDoc(
 					doc(db, "repairers", id),
 					{
@@ -145,20 +151,16 @@ const page = () => {
 				);
 				//redirect the page
 				checked && router.push("/dashboard");
-			} catch (err) {
-				console.log(err.message);
 			}
+		} catch (err) {
+			console.log(err.message);
+		}
 
-			//implement firebase auth sign up
-			try {
-				await createUserWithEmailAndPassword(
-					auth,
-					values.email,
-					values.password
-				);
-			} catch (err) {
-				console.error(err.message);
-			}
+		//implement firebase auth sign up
+		try {
+			await createUserWithEmailAndPassword(auth, values.email, values.password);
+		} catch (err) {
+			setSignupErr(err.message);
 		}
 	};
 	return (
@@ -166,6 +168,9 @@ const page = () => {
 			<div className="py-5 bg-gray-100 lg:bg-gray-50 md:px-36 lg:px-80">
 				<div className="items-center px-5 py-10 mx-5 bg-white shadow-lg rounded-2xl">
 					<div className="text-3xl">The easiest way to find new customers</div>
+					{signupErr && (
+						<div className="text-red-500 text-xl my-5">{signupErr}</div>
+					)}
 					<form onSubmit={handleSubmit}>
 						<div className="my-5 text-xl text-center">Setup your account</div>
 						<div className="mb-5 ">

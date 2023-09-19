@@ -18,28 +18,28 @@ const page = () => {
 	const router = useRouter();
 	//init rtk dispatch method
 	const dispatch = useDispatch();
-	//firestore repairers ref
-	const initialRepairersRef = collection(db, "repairers");
 
-	//FUNCTIONS HERE TAKES CARE OF IMAGE FILE UPLOAD
+	//CREATE ALL STATE BELOW
 	//input ref for file upload
 	const inputRef = useRef(null);
 	const [image, setImage] = useState("");
+	//url state
 	const [url, setUrl] = useState("");
-
-	const handleImageChange = (e) => {
-		const file = e.target.files[0];
-		setImage(file);
-	};
-
-	//FUNCTIONS BELOW TAKES CARE OF INPUT VALIDATIONS AND SUBMIT EVENTS
-	//get form values
+	//state for the form values
 	const [values, setValues] = useState({
 		businessName: "",
 		businessAddress: "",
 		businessCity: "",
 		businessDescription: "",
 	});
+	//firestore repairers ref
+	const initialRepairersRef = collection(db, "repairers");
+
+	//FUNCTIONS HERE TAKES CARE OF IMAGE FILE UPLOAD
+	const handleImageChange = (e) => {
+		const file = e.target.files[0];
+		setImage(file);
+	};
 
 	//handleChange function
 	const handleChange = (e) => {
@@ -68,20 +68,21 @@ const page = () => {
 		};
 	}, [aerror, berror, cerror]);
 
+	//FUNCTIONS BELOW TAKES CARE OF INPUT VALIDATIONS AND SUBMIT EVENTS
 	const handleSubmit = async (e) => {
 		e.preventDefault();
 
-		// Upload selected profile picture to Firebase Cloud Storage
-		const imageRef = ref(storage, `images/${image.name + v4()}`);
-
 		try {
+			//create and get image ref for firebase storage
+			const imageRef = ref(storage, `images/${image.name + v4()}`);
 			// Upload the image to Firebase Storage
 			await uploadBytes(imageRef, image);
 
 			// Get the download URL after the upload is complete
-			const url = await getDownloadURL(imageRef);
-			setUrl(url);
+			const getUrl = await getDownloadURL(imageRef);
+			setUrl(getUrl);
 
+			//VALIDATIONS WITH REGULAR EXPRESSION
 			// Validate name input
 			const nameRe = /^[a-zA-Z]{2,15}$/;
 			// Address regular expression

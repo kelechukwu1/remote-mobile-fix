@@ -28,22 +28,24 @@ export default function RootLayout({ children }) {
 			<html lang="en">
 				<body className={inter.className}>
 					{pathname === "/dashboard" ||
-					pathname === "/requests" ||
-					pathname === "/account" ||
-					pathname === "/settings" ? (
+					pathname === "/dashboard/requests" ||
+					pathname === "/dashboard/account" ||
+					pathname === "/dashboard/settings" ? (
 						<DashboardNav />
 					) : (
 						<Navbar />
 					)}
 					{children}
-					{pathname !== "/login" && (
+					{pathname === "register" ||
+					pathname === "login" ||
+					pathname === "dashboard" ? (
 						<footer className="items-center justify-center my-10 text-md">
 							<div className="text-center">Copyright &copy;Kelechukwu 2023</div>
 							<div className="text-center text-green-500">
 								<Link href="/about">About this project</Link>
 							</div>
 						</footer>
-					)}
+					) : null}
 				</body>
 			</html>
 		</Provider>

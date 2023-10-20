@@ -6,12 +6,23 @@ import { storage } from "../config/firebase";
 import { ref, uploadBytes } from "firebase/storage";
 import { updateDoc, doc } from "firebase/firestore";
 import { db } from "../config/firebase";
+import { v4 } from "uuid";
 
 const page = () => {
 	//init nextJs navigation
 	const router = useRouter();
 
-	//get LS value
+	//CREATE ALL STATES BELOW
+	//image state
+	const [image, setImage] = useState("");
+	//url state
+	const [url, setUrl] = useState("");
+	//create state for client/user problem description
+	const [description, setDescription] = useState("");
+	//description error state
+	const [descriptionErr, setDescriptionErr] = useState("");
+
+	//get LS value i.e the ID for manipulating firestore collection
 	let id;
 	if (typeof window !== "undefined") {
 		id = JSON.parse(localStorage.getItem("userInfo"));
@@ -19,17 +30,14 @@ const page = () => {
 
 	//input ref for file upload
 	const inputRef = useRef(null);
-	const [image, setImage] = useState("");
-	//create state for client problem description
-	const [description, setDescription] = useState("");
-	const [descriptionErr, setDescriptionErr] = useState("");
+
 	//handleImageChange function
 	const handleImageChange = (e) => {
 		const file = e.target.files[0];
 		setImage(file);
 	};
 
-	//clear input error function
+	//clear description input error function
 	useEffect(() => {
 		let timeoutId;
 
@@ -43,6 +51,7 @@ const page = () => {
 			clearTimeout(timeoutId);
 		};
 	}, [descriptionErr]);
+
 	//handleSubmit function
 	const handleSubmit = async (e) => {
 		e.preventDefault();
@@ -50,11 +59,18 @@ const page = () => {
 			setDescriptionErr("description field required");
 		} else {
 			try {
-				//add data to firebase
+				//create and get image ref for firebase storage
+				const imageRef = ref(storage, `imageDescription/${image.name + v4()}`);
+				uploadBytes(imageRef, image);
+				// Get the download URL after the upload is complete
+				const getUrl = await getDownloadURL(imageRef);
+				setUrl(getUrl);
+				//add and merge existing and current data to firestore cloud storage
 				await updateDoc(
 					doc(db, "user", id),
 					{
 						description: description,
+						imageDescription: url,
 					},
 					{ merge: true }
 				);
@@ -63,8 +79,6 @@ const page = () => {
 			} catch (err) {
 				console.log(err.message);
 			}
-			const imageRef = await ref(storage, `images/${image.name}`);
-			uploadBytes(imageRef, image);
 		}
 	};
 	return (
